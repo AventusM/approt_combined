@@ -5,7 +5,7 @@ services:
     build:
       context: ./client
       dockerfile: dev.Dockerfile
-    command: expo start --tunnel # Override the command within Dockerfile. Only tunnel with phone seems to be working here. Having issues with networks/localhost/emulators
+    command: expo start
     ports:
       - 19000:19000
       - 19001:19001
