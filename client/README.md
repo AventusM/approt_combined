@@ -45,9 +45,16 @@ adb connect localhost:5555
 
 4. Open the expo go app and paste the address from clipboard (might be done automatically)
 
-## Deployment - TODO
+## Emulator troubleshooting
 
-More information should come soon...
+<b>Emulator crashes on load</b>
+
+- Try adding more RAM allocation in `tools>avd manager> actions (pick one device)>Show on Disk>config.ini>hw.ramSize `
+- Works best with a completely new virtual device as you might need to configure RAM in some other files as well.
+
+<b>Application doesn't fit screen</b>
+
+- Try configuring the density value in `tools>avd manager>actions (pick one device)>Show on Disk>config.ini>hw.lcd.density`
 
 ## Authors
 
