@@ -98,8 +98,6 @@ export const MainScreen = () => {
   const { currentUser } = useSelector((state) => state.authData);
   const { data, status } = useAppros();
 
-  console.log("useAppros() data", data);
-
   // TODO: Move this into own component?
   if (!currentUser) {
     return (

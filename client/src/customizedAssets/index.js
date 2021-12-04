@@ -1,3 +1,5 @@
-import { ApprotLogo } from "./ApprotLogo";
+import { ApprotLogo } from './ApprotLogo';
+import { Celebrate } from './Celebrate';
+import { Trophy } from './Trophy';
 
-export { ApprotLogo };
+export { ApprotLogo, Celebrate, Trophy };

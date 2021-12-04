@@ -31,11 +31,11 @@ export const GET_ONE_EVENT_GROUP_QUERY_KEY = 'GET_ONE_EVENT_GROUP_QUERY_KEY';
 export const AUTH_KEY = 'AUTH';
 
 // Development, subject to change
-export const EVENTS_API_PATH = '/events';
-export const USERS_API_PATH = '/users';
-export const HEALTHCHECK_API_PATH = '/healthcheck';
-export const LOGIN_API_PATH = '/login';
-export const EVENT_GROUPS_API_PATH = '/eventgroups';
+export const EVENTS_API_PATH = 'api/events';
+export const USERS_API_PATH = 'api/users';
+export const HEALTHCHECK_API_PATH = 'api/healthcheck';
+export const LOGIN_API_PATH = 'api/login';
+export const EVENT_GROUPS_API_PATH = 'api/eventgroups';
 
 const PROD_BASEURL = 'https://blooming-escarpment-41791.herokuapp.com';
 export const BASEURL = Constants.manifest.extra.baseurl ?? PROD_BASEURL;

@@ -18,8 +18,8 @@ const directLinks = [
 router.get("/", (_req, res) => {
   // Necessary adjustment with nginx as it uses '/api/' route.
   // Otherwise the direct address would be '/api/api/users' etc.
-  const nginxCorrectLink = directLinks.map(path => ({link:`/api${path.link}`}))
-  res.render("index.njk", { pathArray: nginxCorrectLink });
+  //const nginxCorrectLink = directLinks.map(path => ({link:`/api${path.link}`}))
+  res.render("index.njk", { pathArray: directLinks });
 });
 
 export default router;

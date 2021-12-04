@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
+//import { TouchableOpacity } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import theme from "../../theme";
 import actions from "../../store/actions";
 import { useJoinAppro, useLeaveAppro } from "../../hooks";
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   listItemContainer: {
     display: "flex",
     flexDirection: "column",
@@ -47,13 +47,58 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
   },
+}); */
+
+const styles = StyleSheet.create({
+  cardContainer: {
+    borderColor: 'rgba(0,0,0,0.1)',
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  cardImage: {
+    backgroundColor: 'rgba(0,0,0,0.1)', 
+    height: 100, 
+    flex: 1, 
+    borderTopLeftRadius: 10, 
+    borderTopRightRadius: 10
+  },
+  cardDataContainer: {
+    display: 'flex',
+    margin: 10
+  },
+  cardDataRow: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between'
+  }
 });
+
+export const ApproPreview = (props) => {
+  const { approData, isSelected, userCanJoin } = props;
+  console.log("approData", approData)
+  return (
+    <TouchableNativeFeedback onPress={() => console.log("Pressed!")}>
+      <View style={styles.cardContainer}>
+      <View style={styles.cardImage}/>
+      <View style={styles.cardDataContainer}>
+        <View style={styles.cardDataRow}>
+          <Text>Name</Text>
+          <Text>StartDate</Text>
+        </View>
+        <View style={styles.cardDataRow}>
+          <Text>StartTime</Text>
+          <Text>Status</Text>
+        </View>
+      </View>
+      </View>
+    </TouchableNativeFeedback>
+  );
+};
 
 // Displays things like title, host, occurence.
 // Pressing it should result to link to the actual appro with map and current progress
 // (coloured markers depending on completed status through qr code reading)
 // TODO: Approdata should have a set of organizers instead of only 1 host? Or mix them?
-export const ApproPreview = (props) => {
+/* export const ApproPreview = (props) => {
   const dispatch = useDispatch();
   const { approData, isSelected, userCanJoin } = props;
 
@@ -86,9 +131,9 @@ export const ApproPreview = (props) => {
       )}
     </View>
   );
-};
+}; */
 
-const JoinLeaveButton = (props) => {
+/* const JoinLeaveButton = (props) => {
   const { userCanJoin, approId } = props;
   const [joinAppro] = useJoinAppro();
   const [leaveAppro] = useLeaveAppro();
@@ -120,4 +165,4 @@ const JoinLeaveButton = (props) => {
       </TouchableOpacity>
     );
   }
-};
+}; */

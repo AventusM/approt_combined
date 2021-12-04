@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useLogin } from "../hooks";
 import theme from "../theme";
 import { SIGN_UP_ROUTE, MAIN_ROUTE } from "../constants";
-import { Celebrate } from "../customizedAssets/Celebrate";
+import { Celebrate, Trophy } from "../customizedAssets/";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -26,6 +26,15 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     marginTop: 15,
     backgroundColor: "#fff",
+  },
+  logo: {
+    width: 50,
+    height: 50
+  },
+  imageContainer: {
+    borderWidth: 2,
+    width: 200,
+    height: 200
   },
   input: {
     flex: 1,
@@ -140,7 +149,7 @@ export const LoginScreen = () => {
       </TouchableOpacity>
 
       <View style={styles.imageContainer}>
-        <Celebrate style={styles.logo} />
+        <Trophy style={styles.logo}/>
         <Text style={styles.bigTitle}>{`Let's start!`}</Text>
       </View>
       <View style={styles.wrapper}>

@@ -20,8 +20,8 @@ export const BCRYPT_SALT_ROUNDS_DEFAULT = 10;
 export const EMPTY_ARRAY = [];
 
 export const ROOT_PATH = "/";
-export const USERS_API_PATH = "/users";
-export const EVENTS_API_PATH = "/events";
-export const EVENTGROUPS_API_PATH = "/eventgroups";
-export const LOGIN_API_PATH = "/login";
-export const HEALTHCHECK_API_PATH = "/healthcheck";
+export const USERS_API_PATH = "/api/users";
+export const EVENTS_API_PATH = "/api/events";
+export const EVENTGROUPS_API_PATH = "/api/eventgroups";
+export const LOGIN_API_PATH = "/api/login";
+export const HEALTHCHECK_API_PATH = "/api/healthcheck";
