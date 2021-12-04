@@ -18,6 +18,7 @@ import {
   LoginScreen,
   RegisterScreen,
   EventScreen,
+  EventInfoScreen,
   EventGroupCreatorScreen,
   SettingsScreen,
 } from "./screens";
@@ -29,6 +30,7 @@ import {
   USERS_ROUTE,
   SIGN_UP_ROUTE,
   SINGLE_EVENT_GROUP_ROUTE,
+  SINGLE_EVENT_GROUP_ROUTE_MAP,
   EVENT_GROUP_CREATION_ROUTE,
   SETTINGS_SCREEN_ROUTE,
 } from "./constants";
@@ -93,7 +95,12 @@ const Main = () => {
             component={EventGroupCreatorScreen}
           />
 
-          <Scene key={SINGLE_EVENT_GROUP_ROUTE} component={EventScreen} />
+          <Scene key={SINGLE_EVENT_GROUP_ROUTE} component={EventInfoScreen}
+            hideNavBar={false}
+            navigationBarStyle={styles.navbarContainer}
+            titleStyle={styles.navbarText}
+            onExit={() => dispatch(actions.navbarActions.showNavbar())}/>
+          <Scene key={SINGLE_EVENT_GROUP_ROUTE_MAP} component={EventScreen} />
           <Scene key={USERS_ROUTE} component={UsersScreen} />
           <Scene
             hideNavBar={false}

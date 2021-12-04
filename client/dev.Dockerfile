@@ -12,20 +12,7 @@ RUN apt-get update -y && \
 EXPOSE 5034
 EXPOSE 5555
 
-COPY . .
+COPY package.json package-lock.json /usr/src/app/
 RUN npm config set unsafe-perm true
-RUN npm i -g npm@latest expo-cli@latest
-#RUN npm i -y -g @expo/ngrok@^4.1.0
 RUN npm install --force
-
-RUN chown -R node /usr/src/app/node_modules
-#RUN chown -R node /usr/src/app/.expo
-USER node
-
-
-
-
-# Preferably be able to use the android emulator
-# It seems to be difficult at this moment
-# docker-compose overrides this with a tunnel (qr code scanning)
-#CMD ["npm", "start"]
+COPY . /usr/src/app

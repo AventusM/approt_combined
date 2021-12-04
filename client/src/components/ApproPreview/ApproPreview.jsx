@@ -74,9 +74,8 @@ const styles = StyleSheet.create({
 
 export const ApproPreview = (props) => {
   const { approData, isSelected, userCanJoin } = props;
-  console.log("approData", approData)
   return (
-    <TouchableNativeFeedback onPress={() => console.log("Pressed!")}>
+    <TouchableNativeFeedback onPress={() => Actions.push(SINGLE_EVENT_GROUP_ROUTE)}>
       <View style={styles.cardContainer}>
       <View style={styles.cardImage}/>
       <View style={styles.cardDataContainer}>
