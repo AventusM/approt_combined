@@ -4,7 +4,7 @@ This repository contains the client for the approt application
 
 ## Requirements
 
-You need [node](https://nodejs.org/en/) to run the project. You also need the [expo-cli](https://docs.expo.io/workflow/expo-cli/) installed
+You need [node](https://nodejs.org/en/) to run the project. You also need [expo-cli](https://docs.expo.io/workflow/expo-cli/) installed along with [docker](https://www.docker.com/) and docker-compose.
 
 ## Dependency installation
 
@@ -30,20 +30,11 @@ On Linux, replace the localhost with value `hostname -I`. It might return multip
 ## Development on Android emulators locally
 
 1. Start your emulator from Android studio
-2. Run following adb commands
+2. Start the application from the `docker-compose.android.yml` file with the following command
 
 ```bash
-adb devices
-adb connect localhost:5555
+docker-compose -f docker-compose.android-yml up
 ```
-
-3. Copy the address from the console of docker client running (example given below). Note, you can also run `hostname -I` to get the address.
-
-```bash
-[11:38:39] Your native app is running at exp://192.168.188.63:19000
-```
-
-4. Open the expo go app and paste the address from clipboard (might be done automatically)
 
 ## Emulator troubleshooting
 
