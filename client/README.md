@@ -18,14 +18,9 @@ npm install
 
 On Linux, replace the localhost with value `hostname -I`. It might return multiple values, but the one beginning with _192.xxx.yy.._ should be the right one. Correct value is the IPV4 address.
 
-## Development pre-requisites
-
-1. _Expo go application needs to be installed. You can install it on emulator by going to the client/ directory and running command `expo start -a`. Download the application from Google/Apple app stores on real devices._
-2. _The development session must be running through `docker-compose -f docker-compose.dev.yml up`_
-
 ## Development on a real mobile device
 
-1. Simply scan the QR code shown in the console to develop the application. _Requires USB debugging options be enabled through developer mode._
+1. Simply scan the QR code shown in the console to develop the application. _Requires USB debugging options be enabled through developer mode AND the expo go application installed from the google play store._
 
 ## Development on Android emulators locally
 
