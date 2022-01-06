@@ -14,16 +14,18 @@ import { Text, TextInput } from "../components/Generic";
 const styles = StyleSheet.create({
   container: {
     alignSelf: "center",
+    backgroundColor: "#FF7E15",
     display: "flex",
+    flex: 1,
     justifyContent: "center",
     width: "100%",
-    backgroundColor: "#FF7E15",
   },
   wrapper: {
+    backgroundColor: "#fff",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     marginTop: 15,
-    backgroundColor: "#fff",
+    flex: 1,
   },
   input: {
     flex: 1,

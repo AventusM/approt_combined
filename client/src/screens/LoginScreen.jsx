@@ -15,17 +15,19 @@ import { Text, TextInput } from "../components/Generic";
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#FF7E15",
     alignSelf: "center",
     display: "flex",
+    flex: 1,
     justifyContent: "center",
     width: "100%",
-    backgroundColor: "#FF7E15",
   },
   wrapper: {
+    backgroundColor: "#fff",
+    flex: 1,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     marginTop: 15,
-    backgroundColor: "#fff",
   },
   logo: {
     width: 50,
