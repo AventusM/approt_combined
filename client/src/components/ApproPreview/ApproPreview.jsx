@@ -1,17 +1,15 @@
 import React from "react";
-import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 //import { TouchableOpacity } from "react-native-gesture-handler";
 import { Actions } from "react-native-router-flux";
 import { Ionicons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
 
 import { SINGLE_EVENT_GROUP_ROUTE } from "../../constants";
 import { Text } from "../Generic";
 import theme from "../../theme";
-import actions from "../../store/actions";
 import { useJoinAppro, useLeaveAppro } from "../../hooks";
 
-/* const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   listItemContainer: {
     display: "flex",
     flexDirection: "column",
@@ -47,9 +45,9 @@ import { useJoinAppro, useLeaveAppro } from "../../hooks";
     padding: 10,
     textAlign: "center",
   },
-}); */
+});
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   cardContainer: {
     borderColor: 'rgba(0,0,0,0.1)',
     borderRadius: 10,
@@ -71,8 +69,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   }
 });
-
-export const ApproPreview = (props) => {
+ */
+/* export const ApproPreview = (props) => {
   const { approData, isSelected, userCanJoin } = props;
   return (
     <TouchableNativeFeedback onPress={() => Actions.push(SINGLE_EVENT_GROUP_ROUTE)}>
@@ -91,19 +89,17 @@ export const ApproPreview = (props) => {
       </View>
     </TouchableNativeFeedback>
   );
-};
+}; */
 
 // Displays things like title, host, occurence.
 // Pressing it should result to link to the actual appro with map and current progress
 // (coloured markers depending on completed status through qr code reading)
 // TODO: Approdata should have a set of organizers instead of only 1 host? Or mix them?
-/* export const ApproPreview = (props) => {
-  const dispatch = useDispatch();
+export const ApproPreview = (props) => {
   const { approData, isSelected, userCanJoin } = props;
 
-  const doOpenMapView = () => {
-    dispatch(actions.navbarActions.hideNavbar());
-    Actions.push(SINGLE_EVENT_GROUP_ROUTE, { id: approData.id });
+  const doOpenDetailedInformationView = () => {
+    Actions.push(SINGLE_EVENT_GROUP_ROUTE, { approData });
   };
 
   return (
@@ -117,22 +113,20 @@ export const ApproPreview = (props) => {
       </View>
       {isSelected && (
         <View style={styles.listItemDataContainer}>
-          <Text>TODO: Display more info (start/end/host etc...) here</Text>
-          <Text>TODO: Display more info (start/end/host etc...) here</Text>
           <TouchableOpacity
             style={styles.listItemDataMapButton}
-            onPress={doOpenMapView}
+            onPress={doOpenDetailedInformationView}
           >
-            <Text style={styles.listItemDataText}>Open map</Text>
+            <Text style={styles.listItemDataText}>View detailed information</Text>
           </TouchableOpacity>
           <JoinLeaveButton userCanJoin={userCanJoin} approId={approData.id} />
         </View>
       )}
     </View>
   );
-}; */
+};
 
-/* const JoinLeaveButton = (props) => {
+const JoinLeaveButton = (props) => {
   const { userCanJoin, approId } = props;
   const [joinAppro] = useJoinAppro();
   const [leaveAppro] = useLeaveAppro();
@@ -164,4 +158,4 @@ export const ApproPreview = (props) => {
       </TouchableOpacity>
     );
   }
-}; */
+};

@@ -1,17 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Actions } from "react-native-router-flux";
+
 import { Text } from '../components/Generic';
+import { SINGLE_EVENT_GROUP_ROUTE_MAP } from '../constants';
+import theme from '../theme';
+
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
+  outerContainer: {
     display: 'flex',
     flex: 1,
-    justifyContent: 'flex-start',
-    //borderWidth: 2,
+    flexDirection: 'column',
+    // Flatlist shouldn't get cut off from the bottom with margin
+    marginTop: 20,
+    marginHorizontal: 20,
+  },
+  levelTrackerCardContainer: {
+    alignItems: 'center',
+    borderColor: 'rgba(184, 184, 184, 0.9)',
+    borderRadius: 15,
+    borderWidth: 2,
+    justifyContent: 'center',
+    marginVertical: 20,
+    paddingVertical: 20,
   },
   cardListContainer: {
-    padding: 20,
     width: '100%', 
   },
   cardContainer: {
@@ -29,7 +43,7 @@ const styles = StyleSheet.create({
     width: 50,
   },
   name: {
-    fontSize: 18,
+    fontSize: theme.fontSizes.smallerHeading,
   },
   completed: {
     color:'#24B273',
@@ -41,28 +55,41 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginBottom: 20,
+  },
+  title: {
+    fontSize: theme.fontSizes.smallerHeading,
+    fontWeight: theme.fontWeights.bold
+  },
+  filterRowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+    width: '100%',
+  },
+  filterRowItemBase: {
+    marginRight: 15,
+  },
+  activeFilterRowItem: {
+    color: theme.colors.primary,
+    fontWeight: theme.fontWeights.bold,
+    textDecorationLine: 'underline'
+  },
+  inactiveFilterRowItem: {
+
   }
 });
 
-export const EventInfoScreen = () => {
-
-  const mockApproData = [
-    {
-    id: 1,
-    name: "Gurula",
-    completedStatus: true
-  },
-  {
-    id: 2,
-    name: "Test",
-    completedStatus: false
-  }
-];
+export const EventInfoScreen = (props) => {
+  const { approData } = props;
+  
+  const doOpenMap = () => {
+    Actions.push(SINGLE_EVENT_GROUP_ROUTE_MAP, { id: approData.id });
+  };
 
 
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.cardContainer}>
+      <TouchableOpacity onPress={doOpenMap} style={styles.cardContainer}>
            <View style={{flexDirection:'row'}}>
               <View style={[styles.iconContainer, {backgroundColor: '#FC8618', marginRight: 20}]} />
               <View>
@@ -72,27 +99,30 @@ export const EventInfoScreen = () => {
           </View>
           <View style={[styles.iconContainer, {backgroundColor: '#24B273'}] } />
           
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Kumpulan approt</Text>
-      <View>
-        <Text>Vielä 5 jäljellä olevaa rastia ensimmäiseen tasoon</Text>
-      </View>
-      <View>
-        <Text>Kaikki</Text>
-        <Text>Järjestys</Text>
-        <Text>Baarit</Text>
-        <Text>Ravintolat</Text>
+    <View style={styles.outerContainer}>
+      {/* Non-list container into own component perhaps? */}
+      <View style={styles.nonListContainer}>
+        <Text style={styles.title}>{approData.name}</Text>
+        <View style={styles.levelTrackerCardContainer}>
+          <Text>Vielä 5 jäljellä olevaa rastia ensimmäiseen tasoon</Text>
+        </View>
+        <View style={styles.filterRowContainer}>
+          <Text style={[styles.activeFilterRowItem, styles.filterRowItemBase]}>Kaikki</Text>
+          <Text style={[styles.filterRowItemBase]}>Järjestys</Text>
+          <Text style={[styles.filterRowItemBase]}>Baarit</Text>
+          <Text style={[styles.filterRowItemBase]}>Ravintolat</Text>
+        </View>
       </View>
       <FlatList
       contentContainerStyle={{justifyContent: 'center'}}
       style={styles.cardListContainer}
       ItemSeparatorComponent={() => <View style={styles.divider}/>}
-      data={mockApproData}
+      data={approData.events}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
     />

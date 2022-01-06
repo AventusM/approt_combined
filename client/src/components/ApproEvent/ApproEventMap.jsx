@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
     display: "flex",
     flexDirection: "column",
-    height: 330, // NOTICE: Keep relative sync with <BottomSheet /> snapPoints props
+    height: 300, // NOTICE: Keep relative sync with <BottomSheet /> snapPoints props
   },
   bottomSheetContentContainer: {
     flex: 1, // Fill the space not used by the header line
@@ -135,7 +135,7 @@ const MapInfoBottomSheet = forwardRef((props, forwardedRef) => {
   return (
     <BottomSheet
       ref={forwardedRef}
-      snapPoints={[300, 30]}
+      snapPoints={[300, 10]}
       initialSnap={CLOSE_BOTTOM_SHEET_FLAG}
       callbackNode={fall}
       borderRadius={10}

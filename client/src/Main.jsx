@@ -85,6 +85,7 @@ const Main = () => {
           <Scene key={MAIN_ROUTE} component={MainScreen} initial />
           <Scene key={LOGIN_ROUTE} component={LoginScreen} />
           <Scene key={SIGN_UP_ROUTE} component={RegisterScreen} />
+          <Scene key={USERS_ROUTE} component={UsersScreen} />
 
           <Scene
             key={EVENTS_REGISTER_ROUTE}
@@ -99,9 +100,17 @@ const Main = () => {
             hideNavBar={false}
             navigationBarStyle={styles.navbarContainer}
             titleStyle={styles.navbarText}
+            title="Event view"
             onExit={() => dispatch(actions.navbarActions.showNavbar())}/>
-          <Scene key={SINGLE_EVENT_GROUP_ROUTE_MAP} component={EventScreen} />
-          <Scene key={USERS_ROUTE} component={UsersScreen} />
+
+          <Scene
+            hideNavBar={false}
+            navigationBarStyle={styles.navbarContainer}
+            titleStyle={styles.navbarText}
+            title="Map view"
+            key={SINGLE_EVENT_GROUP_ROUTE_MAP}
+            onExit={() => dispatch(actions.navbarActions.showNavbar())}
+            component={EventScreen} />
           <Scene
             hideNavBar={false}
             navigationBarStyle={styles.navbarContainer}
