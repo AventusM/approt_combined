@@ -38,7 +38,7 @@ export const HEALTHCHECK_API_PATH = 'api/healthcheck';
 export const LOGIN_API_PATH = 'api/login';
 export const EVENT_GROUPS_API_PATH = 'api/eventgroups';
 
-const PROD_BASEURL = 'https://secure-escarpment-94792.herokuapp.com/';
+const PROD_BASEURL = 'https://secure-escarpment-94792.herokuapp.com';
 export const BASEURL = Constants.manifest.extra.baseurl ?? PROD_BASEURL;
 
 // Options for api to handle (conditionally calling different functions in 1 route to avoid massive amounts of copy/paste)
