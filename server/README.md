@@ -3,6 +3,7 @@
 This repository contains the backend for the approt application.
 
 ## Requirements
+
 You need [node](https://nodejs.org/en/) to run the project. Since the expo client uses tunnels in the frontend, you need to setup [ngrok](https://ngrok.com/) with a user account.
 
 #### Note, you also need the proper .env file to develop the app store version of the application.
@@ -25,9 +26,15 @@ npm run dev
 
 ## Heroku
 
-[This application is hosted on heroku](https://blooming-escarpment-41791.herokuapp.com)
+[This application is hosted on heroku](https://secure-escarpment-94792.herokuapp.com/)
 
-#### Production changes go through github actions in the main branch
+### Manual deployment
+
+1. Go to root of the project
+2. Push backend to heroku by running `git subtree push --prefix server heroku main`
+
+#### Production changes SHOULD go through github actions in the main branch. TODO THIS
 
 ## Authors
+
 Anton Moroz, Susanna Ritala.
