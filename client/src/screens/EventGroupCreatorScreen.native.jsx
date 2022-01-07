@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF7E15",
   },
   title: {
+    color: theme.colors.white,
     fontSize: theme.fontSizes.heading,
     textAlign: "center",
   },

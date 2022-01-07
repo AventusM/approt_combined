@@ -9,9 +9,8 @@ import theme from "../theme";
 import { SIGN_UP_ROUTE, MAIN_ROUTE } from "../constants";
 import { Celebrate, Trophy } from "../customizedAssets/";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 
-import { Text, TextInput } from "../components/Generic";
+import { Text, TextInput, BackButton } from "../components/Generic";
 
 const styles = StyleSheet.create({
   container: {
@@ -137,19 +136,7 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => Actions.push(MAIN_ROUTE)}>
-        <Ionicons
-          name="return-down-back-outline"
-          size={34}
-          color="#fff"
-          style={{
-            alignSelf: "flex-start",
-            marginLeft: 10,
-            padding: 15,
-          }}
-        />
-      </TouchableOpacity>
-
+      <BackButton color={theme.colors.white}/>
       <View style={styles.imageContainer}>
         <Trophy style={styles.logo}/>
         <Text style={styles.bigTitle}>{`Let's start!`}</Text>

@@ -9,7 +9,7 @@ import securestorage from "./securestorage";
 import actions from "./store/actions";
 import theme from "./theme";
 
-import { AppBar, GlobalMessage } from "./components/Generic";
+import { AppBar, BackButton, GlobalMessage } from "./components/Generic";
 
 import {
   MainScreen,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginTop: -Constants.statusBarHeight, // Counteract the marginTop in container
   },
   navbarText: {
-    fontWeight: theme.fontWeights.bold,
+    color: theme.colors.grayText
   },
 });
 
@@ -90,29 +90,38 @@ const Main = () => {
             key={EVENTS_REGISTER_ROUTE}
             component={EventRegistrationScreen}
           />
+
+
+          {/* Scenes with a backbutton + text should probably get put through a single component */}
+          {/* Scenes with a backbutton + text should probably get put through a single component */}
+          {/* Scenes with a backbutton + text should probably get put through a single component */}
           <Scene
             key={EVENT_GROUP_CREATION_ROUTE}
             component={EventGroupCreatorScreen}
+            renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
+            hideNavBar={false}
+            titleStyle={styles.navbarText}
+            title="Event creation"
           />
 
           <Scene key={SINGLE_EVENT_GROUP_ROUTE} component={EventInfoScreen}
+            renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
             hideNavBar={false}
-            navigationBarStyle={styles.navbarContainer}
             titleStyle={styles.navbarText}
-            title="Event view"
-            onExit={() => dispatch(actions.navbarActions.showNavbar())}/>
+            title="Single event"/>
 
           <Scene
+            renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
             hideNavBar={false}
-            navigationBarStyle={styles.navbarContainer}
             titleStyle={styles.navbarText}
-            title="Map view"
+            title="Event map"
             key={SINGLE_EVENT_GROUP_ROUTE_MAP}
             onExit={() => dispatch(actions.navbarActions.showNavbar())}
             component={EventScreen} />
+            
           <Scene
+            renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
             hideNavBar={false}
-            navigationBarStyle={styles.navbarContainer}
             titleStyle={styles.navbarText}
             title="Settings"
             onExit={() => dispatch(actions.navbarActions.showNavbar())}

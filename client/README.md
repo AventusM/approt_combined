@@ -14,6 +14,11 @@ Use the package manager [npm](https://www.npmjs.com/get-npm) to install dependen
 npm install
 ```
 
+## Publishing
+
+1. Change `BASEURL` to the heroku url (Quite weird?? Look into this more)
+2. run `expo publish`
+
 ## Environment variables
 
 On Linux, replace the localhost with value `hostname -I`. It might return multiple values, but the one beginning with _192.xxx.yy.._ should be the right one. Correct value is the IPV4 address.

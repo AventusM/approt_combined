@@ -4,12 +4,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Actions } from "react-native-router-flux";
 import { useForm, Controller } from "react-hook-form";
 import { useSignup } from "../hooks";
-import { LOGIN_ROUTE, MAIN_ROUTE } from "../constants";
+import { LOGIN_ROUTE } from "../constants";
 import theme from "../theme";
 import { Celebrate } from "../customizedAssets/Celebrate";
-import { Ionicons } from "@expo/vector-icons";
 
-import { Text, TextInput } from "../components/Generic";
+import { BackButton, Text, TextInput } from "../components/Generic";
 
 const styles = StyleSheet.create({
   container: {
@@ -117,18 +116,7 @@ export const RegisterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => Actions.push(MAIN_ROUTE)}>
-        <Ionicons
-          name="return-down-back-outline"
-          size={34}
-          color="#fff"
-          style={{
-            alignSelf: "flex-start",
-            marginLeft: 10,
-            padding: 15,
-          }}
-        />
-      </TouchableOpacity>
+      <BackButton color={theme.colors.white}/>
       <View style={styles.imageContainer}>
         <Celebrate style={styles.logo} />
         <Text style={styles.name}>{`Let's start!`}</Text>
