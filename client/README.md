@@ -23,14 +23,16 @@ npm install
 
 On Linux, replace the localhost with value `hostname -I`. It might return multiple values, but the one beginning with _192.xxx.yy.._ should be the right one. Correct value is the IPV4 address.
 
-## Development on a real mobile device
+## Development on a real mobile device (Android)
 
-1. Simply scan the QR code shown in the console to develop the application. _Requires USB debugging options be enabled through developer mode AND the expo go application installed from the google play store._
+1. Run `docker-compose.android.device.dev.yml`
+2. Scan the QR code shown in the console to develop the application. _Requires USB debugging options be enabled through developer mode AND the expo go application installed from the google play store._ (Can be also achieved wirelessly)
+3. (Optional) Mirror the phone screen on the pc with [scrcpy](https://github.com/Genymobile/scrcpy)
 
 ## Development on Android emulators locally
 
 1. Start your emulator from Android studio
-2. Start the application from the `docker-compose.android.yml` file with the following command
+2. Start the application from the `docker-compose.android.emulator.dev.yml` file with the following command
 
 ```bash
 docker-compose -f docker-compose.android-yml up

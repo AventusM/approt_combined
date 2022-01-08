@@ -3,7 +3,8 @@
 ### Quick dev setup
 
 1. Read prerequisites in the client/server directories (basically npm install)
-2. Run `docker-compose -f docker-compose.android.yml up` to run the app in development mode. You need to have the android emulator online at this stage.
+2. Run `docker-compose -f docker-compose.android.emulator.dev.yml up` to run the app in development mode. You need to have the android emulator online at this stage.
+3. Alternatively run `docker-compose -f docker-compose.android.device.dev.yml up` to do the same with an actual device. Almost required when working with the camera functionality. Use it with `scrcpy` to mirror the phone on the pc.
 
 ### Time tracking
 
