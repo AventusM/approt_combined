@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    network_mode: "host"
+    restart: on-failure:5 # "Cold" init might fail due to adb server ack not being fast enough or needing to accept usb debugging within the simulator itself.
+    command: >
+      sh -c "adb -s emulator-5554 wait-for-any-device &&
+             npm run android"
+    volumes:
+      - ./client:/usr/src/app
+    env_file:
+      - ./client/.env
+
+  server:
+    build:
+      context: ./server
+      dockerfile: dev.Dockerfile
+    command: npm run dev # Override the command within Dockerfile
+    network_mode: "host"
+    volumes:
+      - ./server:/usr/src/app
+    env_file:
+      - ./server/.env
+    depends_on:
+      - app
