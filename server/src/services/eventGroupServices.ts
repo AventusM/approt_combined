@@ -74,7 +74,7 @@ const addUserToEventGroup = async (
   if (userIsAlreadyRegistered) {
     return {
       kind: ParticipationErrorType.add_error,
-      message: "User already registered to the event group",
+      message: "Can't have more than one registration at a time",
     };
   }
 
@@ -90,6 +90,8 @@ const removeUserFromEventGroup = async (
   eventGroup: MongooseEventGroupObject,
   user: MongooseUserObject
 ): Promise<MongooseEventGroupObject> => {
+  // Edge case: Refund?
+
   eventGroup.participants = eventGroup.participants.filter(
     (participant) => participant.id?.toString() !== user.id?.toString()
   );

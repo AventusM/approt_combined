@@ -74,6 +74,7 @@ router.post("/:id/participation", async (req, res, next) => {
     const foundEventGroup = await services.eventGroupServices.findEventGroup(
       id
     );
+    
     const foundUser = await services.userServices.findUser(userId);
 
     if (!foundUser) {
@@ -83,32 +84,29 @@ router.post("/:id/participation", async (req, res, next) => {
     }
 
     if (foundUser && foundEventGroup) {
-      if (requestType === ParticipationRequestType.ADD_PARTICIPATION) {
-        const result = await services.eventGroupServices.addUserToEventGroup(
-          foundEventGroup,
-          foundUser
-        );
+      const eventGroupServicesFunction = getEventGroupParticipationFunction(requestType);
+      const result = await eventGroupServicesFunction(foundEventGroup, foundUser);
 
-        if ("kind" in result) {
-          next(result);
-        } else {
-          res.json(result.toJSON());
-        }
-      } else if (
-        requestType === ParticipationRequestType.REMOVE_PARTICIPATION
-      ) {
-        // TODO: ServiceError possibility
-        const result = await services.eventGroupServices.removeUserFromEventGroup(
-          foundEventGroup,
-          foundUser
-        );
-
-        res.json(result.toJSON());
+      if("kind" in result){ // Or any other error-specific prop
+        next(result)
+      } else {
+        res.json(result.toJSON())
       }
     }
   } catch (error) {
     next(error);
   }
 });
+
+const getEventGroupParticipationFunction = (type: ParticipationRequestType) => {
+  if(type === ParticipationRequestType.ADD_PARTICIPATION){
+    return services.eventGroupServices.addUserToEventGroup
+  } else if(type === ParticipationRequestType.REMOVE_PARTICIPATION){
+    return services.eventGroupServices.removeUserFromEventGroup
+  } else {
+    // TODO: This will get changed in the future as more use cases are developed (e.g. finishing one whole appro event)
+    return services.eventGroupServices.addUserToEventGroup
+  }
+}
 
 export default router;

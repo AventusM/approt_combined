@@ -59,45 +59,30 @@ router.post("/:id/participation", async (req, res, next) => {
     }
 
     if (foundUser && foundEvent) {
-      if (requestType === ParticipationRequestType.ADD_PARTICIPATION) {
-        const result = await services.eventServices.addUserToEvent(
-          foundEvent,
-          foundUser
-        );
+      const eventServicesFunction = getEventParticipationFunction(requestType);
+      const result = await eventServicesFunction(foundEvent, foundUser);
 
-        if ("kind" in result) {
-          next(result);
-        } else {
-          res.json(result.toJSON());
-        }
-      } else if (requestType === ParticipationRequestType.COMPLETE_EVENT) {
-        const result = await services.eventServices.completeEvent(
-          foundEvent,
-          foundUser
-        );
-
-        if ("kind" in result) {
-          next(result);
-        } else {
-          res.json(result.toJSON());
-        }
+      if("kind" in result){
+        next(result);
       } else {
-        const result = await services.eventServices.removeUserFromEvent(
-          foundEvent,
-          foundUser
-        );
-
-        if ("kind" in result) {
-          next(result);
-        } else {
-          res.json(result.toJSON());
-        }
+        res.json(result.toJSON());
       }
     }
   } catch (error) {
     next(error);
   }
 });
+
+const getEventParticipationFunction = (type: ParticipationRequestType) => {
+  if(type === ParticipationRequestType.ADD_PARTICIPATION){
+    return services.eventServices.addUserToEvent
+  } else if(type === ParticipationRequestType.COMPLETE_EVENT){
+    return services.eventServices.completeEvent
+  } else {
+    // 3 cases at the time of writing, removing it is
+    return services.eventServices.removeUserFromEvent
+  }
+}
 
 router.delete("/:id", async (req, res, next) => {
   try {
