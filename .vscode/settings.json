@@ -1,3 +1,6 @@
 {
-  "terminal.integrated.shell.linux"
+  "eslint.workingDirectories": [
+    "client",
+    "server"
+  ]
 }

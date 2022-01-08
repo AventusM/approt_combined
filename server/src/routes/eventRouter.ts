@@ -75,14 +75,14 @@ router.post("/:id/participation", async (req, res, next) => {
 
 const getEventParticipationFunction = (type: ParticipationRequestType) => {
   if(type === ParticipationRequestType.ADD_PARTICIPATION){
-    return services.eventServices.addUserToEvent
+    return services.eventServices.addUserToEvent;
   } else if(type === ParticipationRequestType.COMPLETE_EVENT){
-    return services.eventServices.completeEvent
+    return services.eventServices.completeEvent;
   } else {
     // 3 cases at the time of writing, removing it is
-    return services.eventServices.removeUserFromEvent
+    return services.eventServices.removeUserFromEvent;
   }
-}
+};
 
 router.delete("/:id", async (req, res, next) => {
   try {

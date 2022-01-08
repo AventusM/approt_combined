@@ -10,7 +10,6 @@ import chalk from "chalk";
 
 import allRouters from "./routes";
 import envData from "./config";
-console.log("envData", envData)
 import middlewares from "./middlewares";
 
 import {

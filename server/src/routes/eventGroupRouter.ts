@@ -88,9 +88,9 @@ router.post("/:id/participation", async (req, res, next) => {
       const result = await eventGroupServicesFunction(foundEventGroup, foundUser);
 
       if("kind" in result){ // Or any other error-specific prop
-        next(result)
+        next(result);
       } else {
-        res.json(result.toJSON())
+        res.json(result.toJSON());
       }
     }
   } catch (error) {
@@ -100,13 +100,13 @@ router.post("/:id/participation", async (req, res, next) => {
 
 const getEventGroupParticipationFunction = (type: ParticipationRequestType) => {
   if(type === ParticipationRequestType.ADD_PARTICIPATION){
-    return services.eventGroupServices.addUserToEventGroup
+    return services.eventGroupServices.addUserToEventGroup;
   } else if(type === ParticipationRequestType.REMOVE_PARTICIPATION){
-    return services.eventGroupServices.removeUserFromEventGroup
+    return services.eventGroupServices.removeUserFromEventGroup;
   } else {
     // TODO: This will get changed in the future as more use cases are developed (e.g. finishing one whole appro event)
-    return services.eventGroupServices.addUserToEventGroup
+    return services.eventGroupServices.addUserToEventGroup;
   }
-}
+};
 
 export default router;
