@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { LoadingIndicator } from "../components/Generic";
@@ -20,13 +20,19 @@ const styles = StyleSheet.create({
 export const EventScreen = (props) => {
   const { id } = props;
   const { data, status } = useSingleAppro(id);
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(actions.navbarActions.hideNavbar());
+  },[]);
+
+  // For whatever reason, hiding navbar didn't work like with qr screen. So just calling the dispatch here on render.
+
+
   if (status === "loading") {
     return <LoadingIndicator />;
   }
   
-  // For whatever reason, hiding navbar didn't work like with qr screen. So just calling the dispatch here on render.
-  const dispatch = useDispatch();
-  dispatch(actions.navbarActions.hideNavbar());
   return (
     <View style={styles.dataContainer}>
       <ApproEventMap data={data} />
