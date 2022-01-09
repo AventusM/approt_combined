@@ -32,7 +32,10 @@ router.get("/", async (_req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+// Creating single events doesn't seem to be used in this app
+// as of writing this comment (9.11.2022)
+// --> eventGroup POST calls this service instead
+/* router.post("/", async (req, res, next) => {
   try {
     const parsedEventData = utils.toEventBase(req.body);
     const newEventData = await services.eventServices.createEvent(
@@ -43,11 +46,15 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+ */
 
 router.post("/:id/participation", async (req, res, next) => {
   try {
     const { id } = utils.toStringIdFromParamRequest(req.params);
     const { userId, requestType } = utils.toParticipationExtraData(req.body);
+
+    console.log("req params", id);
+    console.log("req userId", userId);
 
     const foundEvent = await services.eventServices.findEvent(id);
     const foundUser = await services.userServices.findUser(userId);
@@ -61,6 +68,8 @@ router.post("/:id/participation", async (req, res, next) => {
     if (foundUser && foundEvent) {
       const eventServicesFunction = getEventParticipationFunction(requestType);
       const result = await eventServicesFunction(foundEvent, foundUser);
+
+      console.log("result", result);
 
       if("kind" in result){
         next(result);

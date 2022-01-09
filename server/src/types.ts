@@ -66,6 +66,7 @@ export type BaseUserObject = Pick<
 export interface MongooseEventObject extends Document {
   name: string;
   location: string;
+  eventGroup: MongooseEventGroupObject;
   point: GeometryObject;
   participants: MongooseUserObject[];
   completedParticipants: MongooseUserObject[];

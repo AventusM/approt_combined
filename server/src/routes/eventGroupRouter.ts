@@ -46,20 +46,27 @@ router.post("/", async (req, res, next) => {
       res.status(NOT_FOUND_CODE).send({ error: "Host user not found" });
       // TODO: GO NEXT HERE WITH A MISSING HOST MESSAGE
     } else {
-      const promises = events.map(
-        async (eventBase) => await services.eventServices.createEvent(eventBase)
-      );
+      // 1. Create base
+      const createdEventGroupBase = await services.eventGroupServices.createEventGroupBase(
+        {name, endDate, startDate},
+        foundHostUserResponse,
+        );
+
+      //2. Create events with event group base id attached to them
+      const promises = events.map(async (eventBase) => await services.eventServices.createEvent(eventBase, createdEventGroupBase));
+
       // We want to have an array of resolved objects instead of a promise
       // TODO: 2nd error as well if event creation fails
-      const responses = await Promise.all(promises);
+      const createdEvents = await Promise.all(promises);
 
-      const createdEventGroup = await services.eventGroupServices.createEventGroup(
-        { name, endDate, startDate },
-        foundHostUserResponse,
-        responses
-      );
+      //3. Attach events to the event group base and save
+      const result = await services.eventGroupServices.addEventsToEventGroup(createdEventGroupBase, createdEvents);
 
-      res.send(createdEventGroup.toJSON());
+      if("kind" in result){
+        next(result);
+      } else {
+        res.send(result.toJSON());
+      }
     }
   } catch (error) {
     next(error);

@@ -34,10 +34,9 @@ const findEventGroup = async (
   return foundEventGroup;
 };
 
-const createEventGroup = async (
+const createEventGroupBase = async (
   basicEventData: Pick<BaseEventGroupObject, "name" | "startDate" | "endDate">,
   host: MongooseUserObject,
-  events: MongooseEventObject[]
 ): Promise<MongooseEventGroupObject> => {
   const isDuplicateName = await EventGroup.find({ name: basicEventData.name });
   if (isDuplicateName.length > 0) {
@@ -51,11 +50,29 @@ const createEventGroup = async (
     startDate: basicEventData.startDate,
     endDate: basicEventData.endDate,
     host,
-    events,
+    events: EMPTY_ARRAY,
     participants: EMPTY_ARRAY,
   });
 
+  console.log("EVENT GROUP BASE CREATED");
   return newEventGroup;
+};
+
+const addEventsToEventGroup = async (eventGroup: MongooseEventGroupObject, events: MongooseEventObject[]): Promise<MongooseEventGroupObject | ServiceError> => {
+  const foundEventGroup = await EventGroup.findById(eventGroup.id);
+
+  if(!foundEventGroup){
+    return {
+      kind: ParticipationErrorType.add_error,
+      message: "Event group not found!",
+    };
+  } else {
+    foundEventGroup.events = events;
+    await foundEventGroup.save();
+
+    console.log("EVENTS ADDED TO THE EVENT GROUP");
+    return foundEventGroup;
+  }
 };
 
 const addUserToEventGroup = async (
@@ -107,8 +124,9 @@ const removeUserFromEventGroup = async (
 
 export default {
   getAll,
-  createEventGroup,
+  createEventGroupBase,
   findEventGroup,
   addUserToEventGroup,
   removeUserFromEventGroup,
+  addEventsToEventGroup
 };

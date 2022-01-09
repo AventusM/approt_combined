@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { EVENT_DOCUMENT_REF, USER_DOCUMENT_REF } from "../constants";
+import { EVENT_DOCUMENT_REF, EVENT_GROUP_DOCUMENT_REF, USER_DOCUMENT_REF } from "../constants";
 import { MongooseEventObject } from "../types";
 
 // Probably useless --> consider using google places id and refetching relevant data when opening the map view
@@ -12,6 +12,7 @@ const geometryPointSchema = new mongoose.Schema({
 const eventSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    eventGroup: { type: mongoose.Schema.Types.ObjectId, ref: EVENT_GROUP_DOCUMENT_REF },
     location: { type: String, required: true },
     point: { type: geometryPointSchema }, // TODO: Use the google place id and refetch the data when actually viewing the map later on? Seems much more logical than this (+ allows probably for linking with google maps to help route ppl)
     participants: [

@@ -7,6 +7,7 @@ import {
 import Event from "../models/event";
 import {
   BaseEventObject,
+  MongooseEventGroupObject,
   MongooseEventObject,
   MongooseUserObject,
   ParticipationErrorType,
@@ -23,16 +24,19 @@ const getAll = async (): Promise<MongooseEventObject[]> => {
 };
 
 const createEvent = async (
-  event: BaseEventObject
+  event: BaseEventObject,
+  eventGroup: MongooseEventGroupObject,
 ): Promise<MongooseEventObject> => {
   const newEvent = await Event.create({
     name: event.name,
     location: event.location,
+    eventGroup: eventGroup._id, // To be populated on fetch
     point: event.point,
-    participants: EMPTY_ARRAY, // Initially empty
-    completedParticipants: EMPTY_ARRAY, // Initially empty
+    participants: EMPTY_ARRAY,
+    completedParticipants: EMPTY_ARRAY,
   });
 
+  console.log("CREATED A SINGLE EVENT TO AN EVENT GROUP");
   return newEvent;
 };
 
@@ -81,11 +85,14 @@ const completeEvent = async (
   event: MongooseEventObject,
   user: MongooseUserObject
 ): Promise<MongooseEventObject | ServiceError> => {
-  const userParticipating = event.participants.find((participantData) => {
-    const stringParticipantId = participantData.id?.toString();
-    const stringUserId = user.id?.toString();
-    const match = stringParticipantId === stringUserId;
 
+  // Event belongs to event group
+  // -->  Check users current participations in appros
+  // and compare with appro (event group) id this event belongs to
+  const userParticipating = user.approParticipations.find(appro => {
+    const stringApproId = appro.id?.toString();
+    const stringUserId = user.id?.toString();
+    const match = stringUserId === stringApproId;
     return match;
   });
 
