@@ -32,22 +32,6 @@ router.get("/", async (_req, res, next) => {
   }
 });
 
-// Creating single events doesn't seem to be used in this app
-// as of writing this comment (9.11.2022)
-// --> eventGroup POST calls this service instead
-/* router.post("/", async (req, res, next) => {
-  try {
-    const parsedEventData = utils.toEventBase(req.body);
-    const newEventData = await services.eventServices.createEvent(
-      parsedEventData
-    );
-    res.send(newEventData.toJSON());
-  } catch (error) {
-    next(error);
-  }
-});
- */
-
 router.post("/:id/participation", async (req, res, next) => {
   try {
     const { id } = utils.toStringIdFromParamRequest(req.params);
