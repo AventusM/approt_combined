@@ -54,7 +54,6 @@ const createEventGroupBase = async (
     participants: EMPTY_ARRAY,
   });
 
-  console.log("EVENT GROUP BASE CREATED");
   return newEventGroup;
 };
 
@@ -70,7 +69,6 @@ const addEventsToEventGroup = async (eventGroup: MongooseEventGroupObject, event
     foundEventGroup.events = events;
     await foundEventGroup.save();
 
-    console.log("EVENTS ADDED TO THE EVENT GROUP");
     return foundEventGroup;
   }
 };

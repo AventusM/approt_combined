@@ -36,7 +36,6 @@ const createEvent = async (
     completedParticipants: EMPTY_ARRAY,
   });
 
-  console.log("CREATED A SINGLE EVENT TO AN EVENT GROUP");
   return newEvent;
 };
 
