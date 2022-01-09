@@ -20,7 +20,6 @@ const eventSchema = new mongoose.Schema(
     completedParticipants: [
       { type: mongoose.Schema.Types.ObjectId, ref: USER_DOCUMENT_REF }, // TODO: Populate this with eventgroups --> frontend renders completed / not icon based whether on user is found in this array
     ],
-    qrCode: { type: String, required: true },
   },
   { timestamps: true },
 );

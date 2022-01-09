@@ -69,7 +69,6 @@ export interface MongooseEventObject extends Document {
   point: GeometryObject;
   participants: MongooseUserObject[];
   completedParticipants: MongooseUserObject[];
-  qrCode: string;
 }
 
 export type BaseEventObject = Pick<

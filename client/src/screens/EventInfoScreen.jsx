@@ -100,7 +100,7 @@ export const EventInfoScreen = (props) => {
               </View>
           </View>
           <View style={[styles.iconContainer, {backgroundColor: '#24B273'}] } />
-          <QRCode value={generateQRValue(item.qrCode)} />
+          <QRCode value={generateQRValue(item.id)} />
       </TouchableOpacity>
     );
   };
