@@ -90,8 +90,8 @@ const completeEvent = async (
   // and compare with appro (event group) id this event belongs to
   const userParticipating = user.approParticipations.find(appro => {
     const stringApproId = appro.id?.toString();
-    const stringUserId = user.id?.toString();
-    const match = stringUserId === stringApproId;
+    const stringEventApproId = event.eventGroup.toString();
+    const match = stringEventApproId === stringApproId;
     return match;
   });
 

@@ -39,6 +39,7 @@ router.post("/:id/participation", async (req, res, next) => {
 
     console.log("req params", id);
     console.log("req userId", userId);
+    console.log("req type", requestType);
 
     const foundEvent = await services.eventServices.findEvent(id);
     const foundUser = await services.userServices.findUser(userId);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { useSelector } from "react-redux";
 import { Actions } from "react-native-router-flux";
 import QRCode from "react-native-qrcode-svg";
 
@@ -81,22 +82,22 @@ const styles = StyleSheet.create({
 });
 
 export const EventInfoScreen = (props) => {
+  const { currentUser } = useSelector((state) => state.authData);
   const { approData } = props;
   
   const doOpenMap = () => {
     Actions.push(SINGLE_EVENT_GROUP_ROUTE_MAP, { id: approData.id });
   };
 
-
   const renderItem = ({ item }) => {
+    const thisEventCompleted = item.completedParticipants.find(participantId => participantId === currentUser.userId);
     return (
       <TouchableOpacity onPress={doOpenMap} style={styles.cardContainer}>
            <View style={{flexDirection:'row'}}>
               <View style={[styles.iconContainer, {backgroundColor: '#FC8618', marginRight: 20}]} />
               <View>
                 <Text style={styles.name}>{item.name}</Text>
-                {/* TODO: Use actual logic for this */}
-                <Text style={item.completedStatus? styles.completed : styles.notCompleted}>{item.completedStatus ? 'Suoritettu': 'Ei suoritettu'}</Text>
+                <Text style={thisEventCompleted? styles.completed : styles.notCompleted}>{thisEventCompleted ? 'Rasti suoritettu!': 'Ei vielä suoritettu'}</Text>
               </View>
           </View>
           <View style={[styles.iconContainer, {backgroundColor: '#24B273'}] } />
