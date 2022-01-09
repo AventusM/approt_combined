@@ -19,7 +19,7 @@ import {
 const getAll = async (): Promise<MongooseEventGroupObject[]> => {
   const allEventGroups = await EventGroup.find({})
     .populate(EVENTS_PARTICIPANTS_FIELD, { username: PICK_FIELD })
-    .populate(EVENTS_FIELD, { name: PICK_FIELD, point: PICK_FIELD })
+    .populate(EVENTS_FIELD, { name: PICK_FIELD, point: PICK_FIELD, qrCode: PICK_FIELD })
     .populate(EVENT_HOST_FIELD, { username: PICK_FIELD });
   return allEventGroups;
 };

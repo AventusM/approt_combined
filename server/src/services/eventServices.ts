@@ -31,6 +31,7 @@ const createEvent = async (
     point: event.point,
     participants: EMPTY_ARRAY, // Initially empty
     completedParticipants: EMPTY_ARRAY, // Initially empty
+    qrCode: event.name // TODO: use with uuid?
   });
 
   return newEvent;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Actions } from "react-native-router-flux";
+import QRCode from "react-native-qrcode-svg";
 
 import { Text } from '../components/Generic';
 import { SINGLE_EVENT_GROUP_ROUTE_MAP } from '../constants';
@@ -94,11 +95,12 @@ export const EventInfoScreen = (props) => {
               <View style={[styles.iconContainer, {backgroundColor: '#FC8618', marginRight: 20}]} />
               <View>
                 <Text style={styles.name}>{item.name}</Text>
+                {/* TODO: Use actual logic for this */}
                 <Text style={item.completedStatus? styles.completed : styles.notCompleted}>{item.completedStatus ? 'Suoritettu': 'Ei suoritettu'}</Text>
               </View>
           </View>
           <View style={[styles.iconContainer, {backgroundColor: '#24B273'}] } />
-          
+          <QRCode value={generateQRValue(item.qrCode)} />
       </TouchableOpacity>
     );
   };
@@ -130,4 +132,7 @@ export const EventInfoScreen = (props) => {
   );
 };
 
-
+// TODO: Add some event data for the confirmation prompt when user runs a QR scan
+const generateQRValue = (id) => {
+  return `${id}`;
+};

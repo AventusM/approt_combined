@@ -1,12 +1,12 @@
 // Also known as "Appros"
-import axios from "axios";
+import axios from 'axios';
 import {
   BASEURL,
   EVENT_GROUPS_API_PATH,
   PARTICIPATION_REQUEST_TYPE_ADD,
   PARTICIPATION_REQUEST_TYPE_REMOVE,
-} from "../constants";
-import securestorage from "../securestorage";
+} from '../constants';
+import securestorage from '../securestorage';
 
 const fetchEventGroups = async () => {
   const response = await axios.get(`${BASEURL}/${EVENT_GROUPS_API_PATH}`);
@@ -15,7 +15,7 @@ const fetchEventGroups = async () => {
 
 const fetchSingleEventGroup = async (eventGroupId) => {
   const response = await axios.get(
-    `${BASEURL}/${EVENT_GROUPS_API_PATH}/${eventGroupId}`
+    `${BASEURL}/${EVENT_GROUPS_API_PATH}/${eventGroupId}`,
   );
 
   return response.data;
@@ -36,7 +36,7 @@ const createEventGroup = async (eventGroupInputData) => {
 
     return response.data;
   } catch (error) {
-    console.log("createEventGroup error", error);
+    console.log('createEventGroup error', error);
   }
 };
 
@@ -54,7 +54,7 @@ const doEventGroupAction = async ({ approId, requestType }) => {
     });
     return response.data;
   } catch (error) {
-    console.log("doEventGroupAction error", error);
+    console.log('doEventGroupAction error', error);
   }
 };
 

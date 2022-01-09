@@ -75,6 +75,7 @@ export const EventRegistrationScreen = () => {
 
   // Disable non-alert area on alert? Could still navigate back when alert was on
   const handleBarCodeScanned = ({ type, data }) => {
+    console.log(data);
     try {
       setScanned(true);
       alert(`Bar code with type ${type} and data ${data} has been scanned!`); // TODO: Maybe into confirmation dialog?
