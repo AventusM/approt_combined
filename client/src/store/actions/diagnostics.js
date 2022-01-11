@@ -1,10 +1,10 @@
-import { SET_ERROR_MESSAGE } from "../../constants";
+import { SET_MESSAGE } from '../../constants';
 
-const setErrorMessage = (message) => {
+const setMessage = (message) => {
   return {
-    type: SET_ERROR_MESSAGE,
+    type: SET_MESSAGE,
     payload: message,
   };
 };
 
-export default { setErrorMessage };
+export default { setMessage };

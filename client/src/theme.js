@@ -1,12 +1,12 @@
 const theme = {
   colors: {
-    textPrimary: "#FF7E15",
-    textSecondary: "white",
-    primary: "#FF7E15",
-    error: "red",
-    listItemDevColor: "rgba(0,0,0,0.1)",
-    white: "#fff",
-    grayText: "#444444"
+    textPrimary: '#FF7E15',
+    textSecondary: 'white',
+    primary: '#FF7E15',
+    error: 'red',
+    listItemDevColor: 'rgba(0,0,0,0.1)',
+    white: '#fff',
+    grayText: '#444444',
   },
   fontSizes: {
     body: 14,
@@ -16,8 +16,11 @@ const theme = {
     mainTitle: 40,
   },
   fontWeights: {
-    normal: "400",
-    bold: "700",
+    normal: '400',
+    bold: '700',
+  },
+  hierarchy: {
+    notificationZIndex: 2,
   },
 };
 

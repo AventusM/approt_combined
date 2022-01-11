@@ -1,10 +1,13 @@
-import { useMutation, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
+import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 
-import api from "../api";
-import actions from "../store/actions";
+import api from '../api';
+import actions from '../store/actions';
 
-import { GET_ALL_EVENT_GROUPS_QUERY_KEY } from "../constants";
+import {
+  ERROR_MESSAGE_TYPE,
+  GET_ALL_EVENT_GROUPS_QUERY_KEY,
+} from '../constants';
 
 export const useJoinAppro = () => {
   const queryClient = useQueryClient();
@@ -13,10 +16,12 @@ export const useJoinAppro = () => {
   const mutation = useMutation(api.eventGroups.joinEventGroup, {
     onSuccess: (data) => {
       if (data.message) {
-        dispatch(actions.diagnosticsActions.setErrorMessage(data.message));
-        setTimeout(() => {
-          dispatch(actions.diagnosticsActions.setErrorMessage(null));
-        }, 5000);
+        dispatch(
+          actions.diagnosticsActions.setMessage({
+            message: data.message,
+            status: ERROR_MESSAGE_TYPE,
+          }),
+        );
       } else {
         queryClient.invalidateQueries(GET_ALL_EVENT_GROUPS_QUERY_KEY);
       }
@@ -27,7 +32,7 @@ export const useJoinAppro = () => {
     try {
       mutation.mutate(approId);
     } catch (error) {
-      console.log("joinAppro error", error);
+      console.log('joinAppro error', error);
     }
   };
 

@@ -14,7 +14,9 @@ export const EVENT_GROUP_CREATION_ROUTE = '/createapproevent';
 export const SETTINGS_SCREEN_ROUTE = '/settings';
 
 // Redux actions / reducers
-export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+export const SET_MESSAGE = 'SET_MESSAGE';
+export const ERROR_MESSAGE_TYPE = 'ERROR_MESSAGE';
+export const SUCCESS_MESSAGE_TYPE = 'SUCCESS_MESSAGE';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 export const SHOW_NAVBAR = 'SHOW_NAVBAR';

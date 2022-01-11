@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
+import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 
-import api from "../api";
-import actions from "../store/actions";
+import api from '../api';
+import actions from '../store/actions';
 
-import { GET_ALL_EVENTS_QUERY_KEY } from "../constants";
+import { ERROR_MESSAGE_TYPE, GET_ALL_EVENTS_QUERY_KEY } from '../constants';
 
 export const useJoinEvent = () => {
   const queryClient = useQueryClient();
@@ -16,10 +16,12 @@ export const useJoinEvent = () => {
       // that the actual error (event action limits / edge cases reached in this request)
       // is returned here with error message field and 400 status
       if (data.message) {
-        dispatch(actions.diagnosticsActions.setErrorMessage(data.message));
-        setTimeout(() => {
-          dispatch(actions.diagnosticsActions.setErrorMessage(null));
-        }, 5000);
+        dispatch(
+          actions.diagnosticsActions.setMessage({
+            message: data.message,
+            status: ERROR_MESSAGE_TYPE,
+          }),
+        );
       } else {
         queryClient.invalidateQueries(GET_ALL_EVENTS_QUERY_KEY);
       }
@@ -30,7 +32,7 @@ export const useJoinEvent = () => {
     try {
       mutation.mutate(eventId);
     } catch (error) {
-      console.log("joinEvent error", error);
+      console.log('joinEvent error', error);
     }
   };
 

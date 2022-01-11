@@ -1,15 +1,17 @@
-import { SET_ERROR_MESSAGE } from "../../constants";
+import { SET_MESSAGE, SUCCESS_MESSAGE_TYPE } from '../../constants';
 
 const INITIAL_STATE = {
   message: null,
+  status: SUCCESS_MESSAGE_TYPE, // Just a default
 };
 
 const diagnosticsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SET_ERROR_MESSAGE: {
+    case SET_MESSAGE: {
       return {
         ...state,
-        message: action.payload,
+        message: action.payload.message,
+        status: action.payload.status,
       };
     }
     default:
