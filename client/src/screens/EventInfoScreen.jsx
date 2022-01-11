@@ -6,6 +6,7 @@ import QRCode from "react-native-qrcode-svg";
 
 import { Text } from '../components/Generic';
 import { SINGLE_EVENT_GROUP_ROUTE_MAP } from '../constants';
+import { useSingleAppro } from '../hooks';
 import theme from '../theme';
 
 
@@ -82,8 +83,9 @@ const styles = StyleSheet.create({
 });
 
 export const EventInfoScreen = (props) => {
-  const { currentUser } = useSelector((state) => state.authData);
   const { approData } = props;
+  const { data, status } = useSingleAppro(approData.id);
+  const { currentUser } = useSelector((state) => state.authData);
   
   const doOpenMap = () => {
     Actions.push(SINGLE_EVENT_GROUP_ROUTE_MAP, { id: approData.id });
@@ -106,11 +108,19 @@ export const EventInfoScreen = (props) => {
     );
   };
 
+  /* TODO --> Try react native skeleton */
+  /* TODO --> Try react native skeleton */
+  /* TODO --> Try react native skeleton */
+  /* TODO --> Try react native skeleton */
+  if(status === "loading"){
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <View style={styles.outerContainer}>
       {/* Non-list container into own component perhaps? */}
       <View style={styles.nonListContainer}>
-        <Text style={styles.title}>{approData.name}</Text>
+        <Text style={styles.title}>{data.name}</Text>
         <View style={styles.levelTrackerCardContainer}>
           <Text>Vielä 5 jäljellä olevaa rastia ensimmäiseen tasoon</Text>
         </View>
@@ -122,12 +132,13 @@ export const EventInfoScreen = (props) => {
         </View>
       </View>
       <FlatList
-      contentContainerStyle={{justifyContent: 'center'}}
-      style={styles.cardListContainer}
-      ItemSeparatorComponent={() => <View style={styles.divider}/>}
-      data={approData.events}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id}
+        contentContainerStyle={{justifyContent: 'center'}}
+        style={styles.cardListContainer}
+        ItemSeparatorComponent={() => <View style={styles.divider}/>}
+        data={data.events}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        extraData={data.events}
     />
     </View>
   );

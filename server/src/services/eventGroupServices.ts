@@ -16,20 +16,21 @@ import {
   PICK_FIELD,
 } from "../constants";
 
+// "Preview version of findEventGroup contents"
 const getAll = async (): Promise<MongooseEventGroupObject[]> => {
   const allEventGroups = await EventGroup.find({})
     .populate(EVENTS_PARTICIPANTS_FIELD, { username: PICK_FIELD })
-    .populate(EVENTS_FIELD, { name: PICK_FIELD, point: PICK_FIELD, completedParticipants: PICK_FIELD})
     .populate(EVENT_HOST_FIELD, { username: PICK_FIELD });
   return allEventGroups;
 };
 
+// Include all the relevant details when fetching a single group
 const findEventGroup = async (
   id: string
 ): Promise<MongooseEventGroupObject | null> => {
   const foundEventGroup = await EventGroup.findById(id)
     .populate(EVENTS_PARTICIPANTS_FIELD, { username: PICK_FIELD })
-    .populate(EVENTS_FIELD, { name: PICK_FIELD, point: PICK_FIELD })
+    .populate(EVENTS_FIELD, { name: PICK_FIELD, point: PICK_FIELD, completedParticipants: PICK_FIELD })
     .populate(EVENT_HOST_FIELD, { username: PICK_FIELD });
   return foundEventGroup;
 };

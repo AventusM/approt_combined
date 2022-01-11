@@ -37,10 +37,6 @@ router.post("/:id/participation", async (req, res, next) => {
     const { id } = utils.toStringIdFromParamRequest(req.params);
     const { userId, requestType } = utils.toParticipationExtraData(req.body);
 
-    console.log("req params", id);
-    console.log("req userId", userId);
-    console.log("req type", requestType);
-
     const foundEvent = await services.eventServices.findEvent(id);
     const foundUser = await services.userServices.findUser(userId);
 
@@ -53,8 +49,6 @@ router.post("/:id/participation", async (req, res, next) => {
     if (foundUser && foundEvent) {
       const eventServicesFunction = getEventParticipationFunction(requestType);
       const result = await eventServicesFunction(foundEvent, foundUser);
-
-      console.log("result", result);
 
       if("kind" in result){
         next(result);
