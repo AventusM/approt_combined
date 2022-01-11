@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   routerContainer: {
-    flex: 1, 
+    flex: 1, zIndex: 1
   },
   navbarContainer: {
     marginTop: -Constants.statusBarHeight, // Counteract the marginTop in container
@@ -83,7 +83,7 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <GlobalMessage />
-      <View style={{flex: 1, zIndex: 1}}>
+      <View style={styles.routerContainer}>
         <Router>
           <Scene hideNavBar={true} key="root">
             <Scene key={MAIN_ROUTE} component={MainScreen} initial />

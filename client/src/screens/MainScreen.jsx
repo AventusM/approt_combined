@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { ApproList, ApproListHeader } from "../components/ApproPreview";
 import { LoadingIndicator } from "../components/Generic";
 import { ApprotLogo } from "../customizedAssets";
@@ -13,6 +13,9 @@ import { Text } from "../components/Generic";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    flexGrow: 1,
+  },
   welcomeDataContainer: {
     alignItems: "center",
     justifyContent: "flex-end",
@@ -145,20 +148,22 @@ export const MainScreen = () => {
 
   const { availableEvents, joinedEvents } = shownApproData();
   return (
-    <View style={styles.dataContainer}>
-      <View style={styles.introContainer}>
-        <Text style={styles.userIntro}>Hello {currentUser.username}!</Text>
+    <ScrollView style={styles.scrollViewContainer}>
+      <View style={styles.dataContainer}>
+        <View style={styles.introContainer}>
+          <Text style={styles.userIntro}>Hello {currentUser.username}!</Text>
+        </View>
+        {/* Maybe a set of charts or something here? */}
+        {/* Maybe a set of charts or something here? */}
+        {/* Maybe a set of charts or something here? */}
+        <ApproListHeader title="Next events" />
+        <ApproList approt={availableEvents} userCanJoin />
+        {/* <Text>TODO: See all view link here?</Text> */}
+        {/* <Text>TODO: See all view link here?</Text> */}
+        {/* <Text>TODO: See all view link here?</Text> */}
+        <ApproListHeader title="Your events" />
+        <ApproList approt={joinedEvents} userCanJoin={false} />
       </View>
-      {/* Maybe a set of charts or something here? */}
-      {/* Maybe a set of charts or something here? */}
-      {/* Maybe a set of charts or something here? */}
-      <ApproListHeader title="Next events" />
-      <ApproList approt={availableEvents} userCanJoin />
-      {/* <Text>TODO: See all view link here?</Text> */}
-      {/* <Text>TODO: See all view link here?</Text> */}
-      {/* <Text>TODO: See all view link here?</Text> */}
-      <ApproListHeader title="Your events" />
-      <ApproList approt={joinedEvents} userCanJoin={false} />
-    </View>
+    </ScrollView>
   );
 };
