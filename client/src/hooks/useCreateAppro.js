@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
+import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 
-import api from "../api";
-import actions from "../store/actions";
+import api from '../api';
+import actions from '../store/actions';
 
-import { GET_ALL_EVENT_GROUPS_QUERY_KEY } from "../constants";
+import { GET_ALL_EVENT_GROUPS_QUERY_KEY } from '../constants';
 
 export const useCreateAppro = () => {
   const queryClient = useQueryClient();
@@ -27,7 +27,7 @@ export const useCreateAppro = () => {
     try {
       mutation.mutate(eventGroupData);
     } catch (error) {
-      console.log("createAppro error", error);
+      console.log('createAppro error', error);
     }
   };
 

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
 import { View, StyleSheet } from "react-native";
 
 import { Text } from "../components/Generic";
 
 import { Camera } from "expo-camera";
 import BarcodeMask from "react-native-barcode-mask";
-import api from "../api";
 import theme from "../theme";
+import { useCompleteEvent } from '../hooks';
 
-import { GET_ALL_EVENTS_QUERY_KEY } from "../constants";
 
 const styles = StyleSheet.create({
   bolderText: {
@@ -21,19 +19,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
-  actionButtonTextBase: {
-    backgroundColor: "green",
-    color: "white",
-    flex: 2,
-    fontWeight: theme.fontWeights.bold,
-    padding: 20,
-    textAlign: "center",
-  },
 });
 
 export const EventRegistrationScreen = () => {
-  //const dispatch = useDispatch();
-
+  const [completeEvent] = useCompleteEvent();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -46,41 +35,12 @@ export const EventRegistrationScreen = () => {
     requestPermission();
   }, []);
 
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  const queryClient = useQueryClient();
-  const mutation = useMutation(api.events.completeEvent, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(GET_ALL_EVENTS_QUERY_KEY);
-    },
-  });
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-  // TODO: Into own hook
-
   // Disable non-alert area on alert? Could still navigate back when alert was on
-  const handleBarCodeScanned = ({ type, data }) => {
-    console.log(data);
+  // At the time of writing, entering the screen hides the navbar anyway
+  const handleBarCodeScanned = ({ data }) => {
     try {
       setScanned(true);
-      alert(`Bar code with type ${type} and data ${data} has been scanned!`); // TODO: Maybe into confirmation dialog?
-      mutation.mutate(data);
-      //dispatch(actions.eventsActions.completeEvent({ eventId: data }));
+      completeEvent(data);
     } catch (error) {
       console.log("handleBarCodeScanned error", error);
     }
