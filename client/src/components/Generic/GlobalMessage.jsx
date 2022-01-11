@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Text } from "../Generic";
 import { ERROR_MESSAGE_TYPE } from '../../constants';
+import actions from '../../store/actions'
 import theme from "../../theme";
 
 const styles = StyleSheet.create({
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
 });
 
 export const GlobalMessage = () => {
+  const dispatch = useDispatch();
   const { message, status } = useSelector((state) => state.diagnosticsData);
   const opacity = useRef(new Animated.Value(0)).current;
 
@@ -44,6 +46,10 @@ export const GlobalMessage = () => {
         Animated.delay(5000),
         Animated.timing(opacity, {toValue: 0, duration: 500, useNativeDriver: true})
       ]).start();
+
+      setTimeout(() => {
+        dispatch(actions.diagnosticsActions.setMessage({message: null, status: ERROR_MESSAGE_TYPE}));
+      }, 5000);
     }
   }, [message]);
 
