@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
+import { Camera } from "expo-camera";
 
 import { Text } from "../components/Generic";
-
-import { Camera } from "expo-camera";
 import BarcodeMask from "react-native-barcode-mask";
 import theme from "../theme";
 import { useCompleteEvent } from '../hooks';

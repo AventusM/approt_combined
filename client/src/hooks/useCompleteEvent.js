@@ -1,7 +1,7 @@
-import { Actions } from 'react-native-router-flux';
+//import { Actions } from 'react-native-router-flux';
+import { Vibration } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useMutation, useQueryClient } from 'react-query';
-import * as Haptics from 'expo-haptics';
 
 import {
   ERROR_MESSAGE_TYPE,
@@ -17,8 +17,7 @@ export const useCompleteEvent = () => {
 
   const mutation = useMutation(api.events.completeEvent, {
     onSuccess: (data) => {
-      //Haptics.selectionAsync();
-      //console.log('message/status (client)', message, status);
+      Vibration.vibrate(1000);
       if (data.message) {
         dispatch(
           actions.diagnosticsActions.setMessage({
@@ -34,8 +33,6 @@ export const useCompleteEvent = () => {
             status: SUCCESS_MESSAGE_TYPE,
           }),
         );
-        console.log('DATA', data);
-        //Actions.popAndPush(SINGLE_EVENT_GROUP_ROUTE_MAP, { id: data.id });
       }
     },
   });

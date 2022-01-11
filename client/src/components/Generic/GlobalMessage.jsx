@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Text } from "../Generic";
 import { ERROR_MESSAGE_TYPE } from '../../constants';
-import actions from '../../store/actions'
+import actions from '../../store/actions';
 import theme from "../../theme";
 
 const styles = StyleSheet.create({
