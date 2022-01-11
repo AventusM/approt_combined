@@ -52,6 +52,9 @@ export const PARTICIPATION_REQUEST_TYPE_COMPLETE = 'complete_event';
 export const OPEN_BOTTOM_SHEET_FLAG = 0;
 export const CLOSE_BOTTOM_SHEET_FLAG = 1;
 
+// OTHER
 // TouchableOpacity press opacity for better visual feedback
 // TODO: To be implemented within the application
 export const FULL_OPACITY = 1;
+export const SUCCESS_VIBRATE_MS = 200;
+export const FAILURE_VIBRATE_MS = 800;

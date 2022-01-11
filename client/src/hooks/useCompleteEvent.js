@@ -5,9 +5,12 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import {
   ERROR_MESSAGE_TYPE,
+  FAILURE_VIBRATE_MS,
   GET_ALL_EVENTS_QUERY_KEY,
   SUCCESS_MESSAGE_TYPE,
+  SUCCESS_VIBRATE_MS,
 } from '../constants';
+
 import api from '../api';
 import actions from '../store/actions';
 
@@ -17,8 +20,8 @@ export const useCompleteEvent = () => {
 
   const mutation = useMutation(api.events.completeEvent, {
     onSuccess: (data) => {
-      Vibration.vibrate(1000);
       if (data.message) {
+        Vibration.vibrate(FAILURE_VIBRATE_MS);
         dispatch(
           actions.diagnosticsActions.setMessage({
             message: data.message,
@@ -26,6 +29,7 @@ export const useCompleteEvent = () => {
           }),
         );
       } else {
+        Vibration.vibrate(SUCCESS_VIBRATE_MS);
         queryClient.invalidateQueries(GET_ALL_EVENTS_QUERY_KEY);
         dispatch(
           actions.diagnosticsActions.setMessage({
