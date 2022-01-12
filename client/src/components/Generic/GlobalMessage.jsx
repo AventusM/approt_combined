@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     elevation: theme.hierarchy.notificationZIndex, // Android
     zIndex: theme.hierarchy.notificationZIndex, // iOS
     borderRadius: 10,
-    top: 20,
+    top: 50,
     left: 40,
     right: 40,
     padding: 10,
@@ -49,7 +49,7 @@ export const GlobalMessage = () => {
 
       setTimeout(() => {
         dispatch(actions.diagnosticsActions.setMessage({message: null, status: ERROR_MESSAGE_TYPE}));
-      }, 5000);
+      }, 6000); // Sum of the animation sequence
     }
   }, [message]);
 

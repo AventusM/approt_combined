@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { ApproList, ApproListHeader } from "../components/ApproPreview";
-import { LoadingIndicator } from "../components/Generic";
+import { MainScreenPlaceholder } from '../components/Placeholders';
 import { ApprotLogo } from "../customizedAssets";
 import { useAppros } from "../hooks";
 import { useSelector } from "react-redux";
@@ -101,6 +101,10 @@ export const MainScreen = () => {
   const { currentUser } = useSelector((state) => state.authData);
   const { data, status } = useAppros();
 
+  if(status === "loading"){
+    return <MainScreenPlaceholder />;
+  }
+
   // TODO: Move this into own component?
   if (!currentUser) {
     return (
@@ -126,9 +130,7 @@ export const MainScreen = () => {
     );
   }
 
-  if (status === "loading") {
-    return <LoadingIndicator />;
-  }
+
 
   const shownApproData = () => {
     return {

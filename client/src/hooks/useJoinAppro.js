@@ -7,6 +7,7 @@ import actions from '../store/actions';
 import {
   ERROR_MESSAGE_TYPE,
   GET_ALL_EVENT_GROUPS_QUERY_KEY,
+  SUCCESS_MESSAGE_TYPE,
 } from '../constants';
 
 export const useJoinAppro = () => {
@@ -24,6 +25,12 @@ export const useJoinAppro = () => {
         );
       } else {
         queryClient.invalidateQueries(GET_ALL_EVENT_GROUPS_QUERY_KEY);
+        dispatch(
+          actions.diagnosticsActions.setMessage({
+            message: 'Successfully joined appro!',
+            status: SUCCESS_MESSAGE_TYPE,
+          }),
+        );
       }
     },
   });
