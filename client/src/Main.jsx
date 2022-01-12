@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { useBackHandler } from "@react-native-community/hooks";
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from "@react-navigation/stack"
 import { Ionicons } from '@expo/vector-icons';
 
 import { GlobalMessage } from "./components/Generic";
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
 });
 
 const Tab = createBottomTabNavigator();
-const RootStack = createNativeStackNavigator();
-const HomeStack = createNativeStackNavigator();
+const RootStack = createStackNavigator();
+const HomeStack = createStackNavigator();
 
 const HomeStackScreen = () => {
   return (
@@ -102,7 +102,7 @@ const Main = () => {
       <GlobalMessage />
       <Tab.Navigator initialRouteName={MAIN_ROUTE}
               screenOptions={({ route }) => ({
-                tabBarShowLabel:false,
+
                 tabBarIcon: ({ focused, color, size }) => {
                   let iconName;
       
@@ -125,7 +125,7 @@ const Main = () => {
         {/* Header replaced in HomeStackScreen */}
         <Tab.Screen name={MAIN_ROUTE} component={HomeStackScreen} options={{headerShown:false}}/>
         <Tab.Screen name={EVENT_GROUP_CREATION_ROUTE} component={EventGroupCreatorScreen} />
-        <Tab.Screen name={EVENTS_REGISTER_ROUTE} component={EventRegistrationScreen} options={{headerShown: 'false', tabBarStyle: {display: 'none'}}}/>
+        <Tab.Screen name={EVENTS_REGISTER_ROUTE} component={EventRegistrationScreen} />
         <Tab.Screen name={SETTINGS_SCREEN_ROUTE} component={SettingsScreen} />
       </Tab.Navigator>
     </SafeAreaView>

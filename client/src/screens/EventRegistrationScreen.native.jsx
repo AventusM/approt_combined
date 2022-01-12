@@ -28,7 +28,6 @@ export const EventRegistrationScreen = () => {
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
-    console.log("EventRegistrationScreen!");
     const requestPermission = async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === "granted");

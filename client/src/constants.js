@@ -2,16 +2,16 @@
 import Constants from 'expo-constants';
 
 // Scene routes. URL style remnants of react-router-native
-export const MAIN_ROUTE = 'main';
+export const MAIN_ROUTE = 'Home';
 export const USERS_ROUTE = 'users';
-export const EVENTS_REGISTER_ROUTE = 'eventregister';
-export const LOGIN_ROUTE = 'login';
-export const SIGN_UP_ROUTE = 'signup';
+export const EVENTS_REGISTER_ROUTE = 'Scan';
+export const LOGIN_ROUTE = 'Login';
+export const SIGN_UP_ROUTE = 'Signup';
 export const SINGLE_EVENT_GROUP_ROUTE_BASE = 'eventgroups';
-export const SINGLE_EVENT_GROUP_ROUTE = 'eventgroups/single';
-export const SINGLE_EVENT_GROUP_ROUTE_MAP = 'eventgroups/single/map';
-export const EVENT_GROUP_CREATION_ROUTE = 'createapproevent';
-export const SETTINGS_SCREEN_ROUTE = 'settings';
+export const SINGLE_EVENT_GROUP_ROUTE = 'Appro view';
+export const SINGLE_EVENT_GROUP_ROUTE_MAP = 'Appro map';
+export const EVENT_GROUP_CREATION_ROUTE = 'Create';
+export const SETTINGS_SCREEN_ROUTE = 'Settings';
 
 // Redux actions / reducers
 export const SET_MESSAGE = 'SET_MESSAGE';
