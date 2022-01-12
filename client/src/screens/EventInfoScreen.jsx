@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { useSelector } from "react-redux";
-import { Actions } from "react-native-router-flux";
+import { useRoute, useNavigation } from '@react-navigation/native';
 import QRCode from "react-native-qrcode-svg";
 
 import { Text } from '../components/Generic';
@@ -82,13 +82,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export const EventInfoScreen = (props) => {
-  const { approData } = props;
-  const { data, status } = useSingleAppro(approData.id);
+export const EventInfoScreen = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
+  const { data, status } = useSingleAppro(route.params.approData.id);
   const { currentUser } = useSelector((state) => state.authData);
   
   const doOpenMap = () => {
-    Actions.push(SINGLE_EVENT_GROUP_ROUTE_MAP, { id: approData.id });
+    navigation.navigate(SINGLE_EVENT_GROUP_ROUTE_MAP, {id: route.params.approData.id});
   };
 
   const renderItem = ({ item }) => {

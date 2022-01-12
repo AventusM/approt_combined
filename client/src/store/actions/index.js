@@ -1,5 +1,4 @@
-import diagnosticsActions from "./diagnostics";
-import authActions from "./auth";
-import navbarActions from "./navbar";
+import diagnosticsActions from './diagnostics';
+import authActions from './auth';
 
-export default { diagnosticsActions, authActions, navbarActions };
+export default { diagnosticsActions, authActions };

@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Actions } from "react-native-router-flux";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigation } from "@react-navigation/native";
+
 import { useSignup } from "../hooks";
 import { LOGIN_ROUTE } from "../constants";
-import theme from "../theme";
 import { Celebrate } from "../customizedAssets/Celebrate";
-
-import { BackButton, Text, TextInput } from "../components/Generic";
+import { Text, TextInput } from "../components/Generic";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
 });
 
 export const RegisterScreen = () => {
+  const navigation = useNavigation();
   const { control, handleSubmit, errors, watch } = useForm();
 
   const usernameRef = useRef({});
@@ -116,7 +117,6 @@ export const RegisterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton color={theme.colors.white}/>
       <View style={styles.imageContainer}>
         <Celebrate style={styles.logo} />
         <Text style={styles.name}>{`Let's start!`}</Text>
@@ -206,7 +206,7 @@ export const RegisterScreen = () => {
         </View>
         <View style={styles.signInTextContainer}>
           <Text style={styles.userText}>On jo käyttäjä?</Text>
-          <TouchableOpacity onPress={() => Actions.push(LOGIN_ROUTE)}>
+          <TouchableOpacity onPress={() => navigation.navigate(LOGIN_ROUTE)}>
             <Text style={styles.signInText}>Kirjaudu sisään</Text>
           </TouchableOpacity>
         </View>

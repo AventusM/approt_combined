@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../api';
 import actions from '../store/actions';
@@ -15,6 +15,7 @@ import {
 export const useCreateAppro = () => {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const mutation = useMutation(api.eventGroups.createEventGroup, {
     onSuccess: (data) => {
@@ -34,7 +35,7 @@ export const useCreateAppro = () => {
           }),
         );
 
-        Actions.push(MAIN_ROUTE);
+        navigation.navigate(MAIN_ROUTE);
       }
     },
   });

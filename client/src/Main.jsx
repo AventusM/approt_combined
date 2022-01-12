@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { StyleSheet, View } from "react-native";
-import { Router, Scene, Actions } from "react-native-router-flux";
+import { useDispatch, useSelector } from "react-redux";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { useBackHandler } from "@react-native-community/hooks";
-import Constants from "expo-constants";
+import { useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 
+import { GlobalMessage } from "./components/Generic";
 import securestorage from "./securestorage";
 import actions from "./store/actions";
-import theme from "./theme";
+import theme from './theme';
 
-import { AppBar, BackButton, GlobalMessage } from "./components/Generic";
 
 import {
   MainScreen,
-  UsersScreen,
   EventRegistrationScreen,
   LoginScreen,
   RegisterScreen,
@@ -27,7 +28,6 @@ import {
   EVENTS_REGISTER_ROUTE,
   LOGIN_ROUTE,
   MAIN_ROUTE,
-  USERS_ROUTE,
   SIGN_UP_ROUTE,
   SINGLE_EVENT_GROUP_ROUTE,
   SINGLE_EVENT_GROUP_ROUTE_MAP,
@@ -38,22 +38,29 @@ import {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    marginTop: Constants.statusBarHeight,
     position: 'relative',
-  },
-  routerContainer: {
-    flex: 1, zIndex: 1
-  },
-  navbarContainer: {
-    marginTop: -Constants.statusBarHeight, // Counteract the marginTop in container
-  },
-  navbarText: {
-    color: theme.colors.grayText
   },
 });
 
+const Tab = createBottomTabNavigator();
+const RootStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
+
+const HomeStackScreen = () => {
+  return (
+    <HomeStack.Navigator>
+      {/* Be careful, same name as with the Tab.Screen. Might bring in some errors, not sure yet. */}
+      <HomeStack.Screen name={MAIN_ROUTE} component={MainScreen} />
+      <HomeStack.Screen name={SINGLE_EVENT_GROUP_ROUTE} component={EventInfoScreen} />
+      <HomeStack.Screen name={SINGLE_EVENT_GROUP_ROUTE_MAP} component={EventScreen} />
+    </HomeStack.Navigator>
+  );
+};
+
 const Main = () => {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.authData);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const checkToken = async () => {
@@ -71,74 +78,59 @@ const Main = () => {
     checkToken();
   }, []);
 
-  // Replaces <BackButton /> functionality (originally imported from react-router-native).
-  // Need to have ability to hide the navbar sometimes (e.g. entering qr - reader camera view).
-  // Previously pressing back button resulted in going back but navbar still being hidden.
   useBackHandler(() => {
-    Actions.pop();
-    dispatch(actions.navbarActions.showNavbar());
+    if(navigation.canGoBack()){
+      navigation.goBack();
+    }
     return true;
   });
 
-  return (
-    <View style={styles.container}>
+  if(!currentUser){
+    return (
+      <SafeAreaView style={styles.container}>
+        <GlobalMessage />
+        <RootStack.Navigator screenOptions={{headerShown: false}} initialRouteName={MAIN_ROUTE}>
+          <RootStack.Screen name={MAIN_ROUTE} component={MainScreen} />
+          <RootStack.Screen name={LOGIN_ROUTE} component={LoginScreen} />
+          <RootStack.Screen name={SIGN_UP_ROUTE} component={RegisterScreen} />
+        </RootStack.Navigator>
+      </SafeAreaView>
+    );
+  } else {
+    return (
+    <SafeAreaView style={styles.container}>
       <GlobalMessage />
-      <View style={styles.routerContainer}>
-        <Router>
-          <Scene hideNavBar={true} key="root">
-            <Scene key={MAIN_ROUTE} component={MainScreen} initial />
-            <Scene key={LOGIN_ROUTE} component={LoginScreen} />
-            <Scene key={SIGN_UP_ROUTE} component={RegisterScreen} />
-            <Scene key={USERS_ROUTE} component={UsersScreen} />
-
-            <Scene
-              key={EVENTS_REGISTER_ROUTE}
-              component={EventRegistrationScreen}
-            />
-
-
-            {/* Scenes with a backbutton + text should probably get put through a single component */}
-            {/* Scenes with a backbutton + text should probably get put through a single component */}
-            {/* Scenes with a backbutton + text should probably get put through a single component */}
-            <Scene
-              key={EVENT_GROUP_CREATION_ROUTE}
-              component={EventGroupCreatorScreen}
-              renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
-              hideNavBar={false}
-              titleStyle={styles.navbarText}
-              title="Event creation"
-            />
-
-            <Scene key={SINGLE_EVENT_GROUP_ROUTE} component={EventInfoScreen}
-              renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
-              hideNavBar={false}
-              titleStyle={styles.navbarText}
-              title="Single event"/>
-
-            <Scene
-              renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
-              hideNavBar={false}
-              titleStyle={styles.navbarText}
-              title="Event map"
-              key={SINGLE_EVENT_GROUP_ROUTE_MAP}
-              onExit={() => dispatch(actions.navbarActions.showNavbar())}
-              component={EventScreen} />
-              
-            <Scene
-              renderLeftButton={() => <BackButton color={theme.colors.primary}/>}
-              hideNavBar={false}
-              titleStyle={styles.navbarText}
-              title="Settings"
-              onExit={() => dispatch(actions.navbarActions.showNavbar())}
-              key={SETTINGS_SCREEN_ROUTE}
-              component={SettingsScreen}
-            />
-          </Scene>
-        </Router>
-      </View>
-      <AppBar />
-    </View>
-  );
+      <Tab.Navigator initialRouteName={MAIN_ROUTE}
+              screenOptions={({ route }) => ({
+                tabBarShowLabel:false,
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+      
+                  if (route.name === MAIN_ROUTE) {
+                    iconName = focused ? 'home' : 'home-outline';
+                  } else if (route.name === SETTINGS_SCREEN_ROUTE) {
+                    iconName = focused ? 'settings' : 'settings-outline';
+                  } else if (route.name === EVENT_GROUP_CREATION_ROUTE){
+                    iconName = focused ? 'add-circle' : 'add-circle-outline';
+                  } else {
+                    iconName = focused ? 'scan' : 'scan-outline';
+                  }
+      
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: theme.colors.primary,
+                tabBarInactiveTintColor:"rgba(0,0,0,0.4)",
+              })}
+      >
+        {/* Header replaced in HomeStackScreen */}
+        <Tab.Screen name={MAIN_ROUTE} component={HomeStackScreen} options={{headerShown:false}}/>
+        <Tab.Screen name={EVENT_GROUP_CREATION_ROUTE} component={EventGroupCreatorScreen} />
+        <Tab.Screen name={EVENTS_REGISTER_ROUTE} component={EventRegistrationScreen} options={{headerShown: 'false', tabBarStyle: {display: 'none'}}}/>
+        <Tab.Screen name={SETTINGS_SCREEN_ROUTE} component={SettingsScreen} />
+      </Tab.Navigator>
+    </SafeAreaView>
+    );
+  }
 };
 
 export default Main;

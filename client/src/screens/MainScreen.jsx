@@ -5,10 +5,9 @@ import { LoadingIndicator } from "../components/Generic";
 import { ApprotLogo } from "../customizedAssets";
 import { useAppros } from "../hooks";
 import { useSelector } from "react-redux";
-import { Actions } from "react-native-router-flux";
+import { useNavigation } from '@react-navigation/native';
 
 import { LOGIN_ROUTE, SIGN_UP_ROUTE } from "../constants";
-
 import { Text } from "../components/Generic";
 import theme from "../theme";
 
@@ -98,6 +97,7 @@ const styles = StyleSheet.create({
 });
 
 export const MainScreen = () => {
+  const navigation = useNavigation();
   const { currentUser } = useSelector((state) => state.authData);
   const { data, status } = useAppros();
 
@@ -110,14 +110,14 @@ export const MainScreen = () => {
           <Text style={styles.title}>Approt</Text>
           <TouchableOpacity
             style={styles.loginScreenButton}
-            onPress={() => Actions.push(LOGIN_ROUTE)}
+            onPress={() => navigation.navigate(LOGIN_ROUTE)}
             underlayColor="#fff"
           >
             <Text style={styles.loginText}>Kirjaudu sisään</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.signupScreenButton}
-            onPress={() => Actions.push(SIGN_UP_ROUTE)}
+            onPress={() => navigation.navigate(SIGN_UP_ROUTE)}
           >
             <Text style={styles.signupText}>Rekisteröidy</Text>
           </TouchableOpacity>

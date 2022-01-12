@@ -1,11 +1,8 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { Actions } from "react-native-router-flux";
 
 import { Text } from "../components/Generic";
-import { MAIN_ROUTE } from "../constants";
-
 import actions from "../store/actions";
 import theme from "../theme";
 
@@ -41,7 +38,6 @@ export const SettingsScreen = () => {
 
   const doSignOut = () => {
     dispatch(actions.authActions.logout());
-    Actions.popTo(MAIN_ROUTE); // TODO: Improve animation with this? It "pops" and waits a moment before redirecting to index
   };
 
   return (

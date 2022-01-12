@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Provider } from 'react-redux';
 import { QueryClientProvider, QueryClient } from 'react-query';
+import { NavigationContainer } from '@react-navigation/native';
 
 import { VarelaRound_400Regular } from '@expo-google-fonts/varela-round';
 import AppLoading from 'expo-app-loading';
@@ -25,7 +26,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <Main />
+        <NavigationContainer>
+          <Main />
+        </NavigationContainer>
       </Provider>
     </QueryClientProvider>
   );

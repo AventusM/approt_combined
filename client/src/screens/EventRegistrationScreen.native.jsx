@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
+import { useIsFocused } from '@react-navigation/native';
 import { Camera } from "expo-camera";
 
 import { Text } from "../components/Generic";
@@ -21,11 +22,13 @@ const styles = StyleSheet.create({
 });
 
 export const EventRegistrationScreen = () => {
+  const isFocused = useIsFocused();
   const [completeEvent] = useCompleteEvent();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
+    console.log("EventRegistrationScreen!");
     const requestPermission = async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === "granted");
@@ -61,7 +64,7 @@ export const EventRegistrationScreen = () => {
     );
   }
 
-  return (
+  return (isFocused &&
     <Camera
       onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
       ratio="16:9"

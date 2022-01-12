@@ -1,4 +1,4 @@
-import { Actions } from 'react-native-router-flux';
+//import { useNavigation } from '@react-navigation/native';
 import { Vibration } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useMutation, useQueryClient } from 'react-query';
@@ -17,9 +17,11 @@ import actions from '../store/actions';
 export const useCompleteEvent = () => {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+  //const navigation = useNavigation();
 
   const mutation = useMutation(api.events.completeEvent, {
     onSuccess: (data) => {
+      console.log('DATA:', data);
       if (data.message) {
         Vibration.vibrate(FAILURE_VIBRATE_MS);
         dispatch(
@@ -37,7 +39,9 @@ export const useCompleteEvent = () => {
             status: SUCCESS_MESSAGE_TYPE,
           }),
         );
-        Actions.pop();
+
+        //navigation.navigate()
+        // TODO: USE THIS --> navigation.goBack(); // Accessed originally from a single event group --> should pop right back there
       }
     },
   });

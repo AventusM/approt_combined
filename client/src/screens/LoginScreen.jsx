@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
-import { Actions } from "react-native-router-flux";
-import { useSelector } from "react-redux";
-import { useLogin } from "../hooks";
-import theme from "../theme";
-import { SIGN_UP_ROUTE, MAIN_ROUTE } from "../constants";
-import { Celebrate, Trophy } from "../customizedAssets/";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { Text, TextInput, BackButton } from "../components/Generic";
+
+import { SIGN_UP_ROUTE } from "../constants";
+import { Text, TextInput } from "../components/Generic";
+import { Trophy } from "../customizedAssets";
+import { useLogin } from "../hooks";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   container: {
@@ -114,17 +113,9 @@ const styles = StyleSheet.create({
 });
 
 export const LoginScreen = () => {
-  const { currentUser } = useSelector((state) => state.authData);
+  const navigation = useNavigation();
   const { control, handleSubmit, errors } = useForm();
   const [login] = useLogin();
-
-  // If login was succesful, currentUser will get its state changed
-  // Redirect will happen here instead of within action creator
-  useEffect(() => {
-    if (currentUser) {
-      Actions.push(MAIN_ROUTE);
-    }
-  }, [currentUser]);
 
   const onSubmit = (credentials) => {
     try {
@@ -136,7 +127,6 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton color={theme.colors.white}/>
       <View style={styles.imageContainer}>
         <Trophy style={styles.logo}/>
         <Text style={styles.bigTitle}>{`Let's start!`}</Text>
@@ -200,7 +190,7 @@ export const LoginScreen = () => {
           </TouchableOpacity>
           <View style={styles.signUpTextContainer}>
             <Text style={styles.noUserText}>Ei käyttäjää?</Text>
-            <TouchableOpacity onPress={() => Actions.push(SIGN_UP_ROUTE)}>
+            <TouchableOpacity onPress={() => navigation.navigate(SIGN_UP_ROUTE)}>
               <Text style={styles.signUpText}>Luo käyttäjä</Text>
             </TouchableOpacity>
           </View>

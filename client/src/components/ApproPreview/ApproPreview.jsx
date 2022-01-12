@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { Actions } from "react-native-router-flux";
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { SINGLE_EVENT_GROUP_ROUTE } from "../../constants";
@@ -90,15 +90,12 @@ const styles = StyleSheet.create({
   );
 }; */
 
-// Displays things like title, host, occurence.
-// Pressing it should result to link to the actual appro with map and current progress
-// (coloured markers depending on completed status through qr code reading)
-// TODO: Approdata should have a set of organizers instead of only 1 host? Or mix them?
 export const ApproPreview = (props) => {
+  const navigation = useNavigation();
   const { approData, isSelected, userCanJoin } = props;
 
   const doOpenDetailedInformationView = () => {
-    Actions.push(SINGLE_EVENT_GROUP_ROUTE, { approData });
+    navigation.navigate(SINGLE_EVENT_GROUP_ROUTE, { approData });
   };
 
   return (

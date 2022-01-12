@@ -1,11 +1,10 @@
-import { useMutation, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
-import { Actions } from "react-native-router-flux";
+import { useMutation, useQueryClient } from 'react-query';
+import { useDispatch } from 'react-redux';
 
-import api from "../api";
-import actions from "../store/actions";
+import api from '../api';
+import actions from '../store/actions';
 
-import { GET_ALL_USERS_QUERY_KEY, MAIN_ROUTE } from "../constants";
+import { GET_ALL_USERS_QUERY_KEY } from '../constants';
 
 export const useSignup = ({ usernameRef, passwordRef }) => {
   const queryClient = useQueryClient();
@@ -18,9 +17,8 @@ export const useSignup = ({ usernameRef, passwordRef }) => {
         actions.authActions.login({
           username: usernameRef.current,
           password: passwordRef.current,
-        })
+        }),
       );
-      Actions.push(MAIN_ROUTE);
     },
   });
 
@@ -28,7 +26,7 @@ export const useSignup = ({ usernameRef, passwordRef }) => {
     try {
       mutation.mutate(registrationData);
     } catch (error) {
-      console.log("signUpAndLogin error", error);
+      console.log('signUpAndLogin error', error);
     }
   };
 
