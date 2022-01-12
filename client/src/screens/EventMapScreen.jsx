@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 // Should contain a couple of components
 // 1. A map with markers of different color depending on completed status
 // 2. Overview component (how many ppl there etc.)
-export const EventScreen = () => {
+export const EventMapScreen = () => {
   const route = useRoute();
   const { data, status } = useSingleAppro(route.params.id);
 

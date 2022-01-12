@@ -18,7 +18,7 @@ import {
   EventRegistrationScreen,
   LoginScreen,
   RegisterScreen,
-  EventScreen,
+  EventMapScreen,
   EventInfoScreen,
   EventGroupCreatorScreen,
   SettingsScreen,
@@ -52,7 +52,7 @@ const HomeStackScreen = () => {
       {/* Be careful, same name as with the Tab.Screen. Might bring in some errors, not sure yet. */}
       <HomeStack.Screen name={MAIN_ROUTE} component={MainScreen} />
       <HomeStack.Screen name={SINGLE_EVENT_GROUP_ROUTE} component={EventInfoScreen} />
-      <HomeStack.Screen name={SINGLE_EVENT_GROUP_ROUTE_MAP} component={EventScreen} />
+      <HomeStack.Screen name={SINGLE_EVENT_GROUP_ROUTE_MAP} component={EventMapScreen} />
     </HomeStack.Navigator>
   );
 };
