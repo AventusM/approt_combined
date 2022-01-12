@@ -7,6 +7,7 @@ import { EventMapScreen } from './EventMapScreen';
 import { EventGroupCreatorScreen } from './EventGroupCreatorScreen';
 import { SettingsScreen } from './SettingsScreen';
 import { EventInfoScreen } from './EventInfoScreen';
+import { WelcomeScreen } from './WelcomeScreen';
 
 export {
   MainScreen,
@@ -18,4 +19,5 @@ export {
   EventGroupCreatorScreen,
   SettingsScreen,
   EventInfoScreen,
+  WelcomeScreen,
 };

@@ -1,13 +1,10 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { ApproList, ApproListHeader } from "../components/ApproPreview";
 import { MainScreenPlaceholder } from '../components/Placeholders';
-import { ApprotLogo } from "../customizedAssets";
 import { useAppros } from "../hooks";
 import { useSelector } from "react-redux";
-import { useNavigation } from '@react-navigation/native';
 
-import { LOGIN_ROUTE, SIGN_UP_ROUTE } from "../constants";
 import { Text } from "../components/Generic";
 import theme from "../theme";
 
@@ -97,40 +94,12 @@ const styles = StyleSheet.create({
 });
 
 export const MainScreen = () => {
-  const navigation = useNavigation();
   const { currentUser } = useSelector((state) => state.authData);
   const { data, status } = useAppros();
 
   if(status === "loading"){
     return <MainScreenPlaceholder />;
   }
-
-  // TODO: Move this into own component?
-  if (!currentUser) {
-    return (
-      <View style={styles.welcomeDataContainer}>
-        <ApprotLogo style={styles.logo} />
-        <View style={styles.box}>
-          <Text style={styles.title}>Approt</Text>
-          <TouchableOpacity
-            style={styles.loginScreenButton}
-            onPress={() => navigation.navigate(LOGIN_ROUTE)}
-            underlayColor="#fff"
-          >
-            <Text style={styles.loginText}>Kirjaudu sisään</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.signupScreenButton}
-            onPress={() => navigation.navigate(SIGN_UP_ROUTE)}
-          >
-            <Text style={styles.signupText}>Rekisteröidy</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-
 
   const shownApproData = () => {
     return {

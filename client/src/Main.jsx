@@ -22,6 +22,7 @@ import {
   EventInfoScreen,
   EventGroupCreatorScreen,
   SettingsScreen,
+  WelcomeScreen,
 } from "./screens";
 
 import {
@@ -33,6 +34,7 @@ import {
   SINGLE_EVENT_GROUP_ROUTE_MAP,
   EVENT_GROUP_CREATION_ROUTE,
   SETTINGS_SCREEN_ROUTE,
+  WELCOME_ROUTE,
 } from "./constants";
 
 const styles = StyleSheet.create({
@@ -89,8 +91,8 @@ const Main = () => {
     return (
       <SafeAreaView style={styles.container}>
         <GlobalMessage />
-        <RootStack.Navigator screenOptions={{headerShown: false}} initialRouteName={MAIN_ROUTE}>
-          <RootStack.Screen name={MAIN_ROUTE} component={MainScreen} />
+        <RootStack.Navigator screenOptions={{headerShown: false}} initialRouteName={WELCOME_ROUTE}>
+          <RootStack.Screen name={WELCOME_ROUTE} component={WelcomeScreen} />
           <RootStack.Screen name={LOGIN_ROUTE} component={LoginScreen} />
           <RootStack.Screen name={SIGN_UP_ROUTE} component={RegisterScreen} />
         </RootStack.Navigator>
