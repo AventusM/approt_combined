@@ -40,6 +40,14 @@ docker-compose -f docker-compose.android-yml up
 
 ## Emulator troubleshooting
 
+<b>Unable to locate ADB</b>
+
+- [Stackoverflow thread](https://stackoverflow.com/a/65944695)
+
+<b>The emulator process for _EMULATOR NAME_ has terminated</b>
+
+- [Stackoverflow thread](https://stackoverflow.com/questions/67346232/android-emulator-issues-in-new-versions-the-emulator-process-has-terminated/69997698)
+
 <b>Emulator crashes on load</b>
 
 - Try adding more RAM allocation in `tools>avd manager> actions (pick one device)>Show on Disk>config.ini>hw.ramSize `

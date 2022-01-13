@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
 import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 import { Text } from "../Generic";
@@ -16,16 +15,21 @@ const styles = StyleSheet.create({
 
 export const GooglePlacesInput = (props) => {
   const { addEvent } = props;
+  // Ref used to clear input after selecting a place https://github.com/FaridSafi/react-native-google-places-autocomplete/issues/155
+  let placesRef = useRef();
+
   return (
     <Fragment>
       <Text>Select places</Text>
       <GooglePlacesAutocomplete
+        ref={(instance) => { placesRef = instance; }}
         styles={{
           textInput: styles.textInput,
         }}
         fetchDetails
         placeholder="Search for a place"
         onPress={(data, details = null) => {
+          placesRef.setAddressText("");
           // 'details' is provided when fetchDetails = true
 
           addEvent({
@@ -36,7 +40,7 @@ export const GooglePlacesInput = (props) => {
           });
         }}
         query={{
-          key: "AIzaSyDmEjOEY1y3ygIos8Qvpv-oQjsAFtD3xpk",
+          key: "AIzaSyDmEjOEY1y3ygIos8Qvpv-oQjsAFtD3xpk", // TODO: USE CONSTANTS / ENV?
           language: "en",
           components: "country:fi",
         }}

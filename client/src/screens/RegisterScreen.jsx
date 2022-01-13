@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useSignup } from "../hooks";
 import { LOGIN_ROUTE } from "../constants";
@@ -116,102 +117,104 @@ export const RegisterScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Celebrate style={styles.logo} />
-        <Text style={styles.name}>{`Let's start!`}</Text>
-      </View>
-      <View style={styles.wrapper}>
-        <Text style={styles.title}>Rekisteröidy</Text>
-        <View style={styles.form}>
-          <Controller
-            control={control}
-            render={({ onChange, onBlur, value }) => (
-              <View style={styles.inputContainer}>
-                <MaterialIcons
-                  name="alternate-email"
-                  size={24}
-                  style={styles.icon}
-                />
-                <TextInput
-                  placeholder="your@email.com"
-                  style={styles.input}
-                  placeholderTextColor="#888888"
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                  error={errors.username}
-                />
-              </View>
-            )}
-            name="username"
-            rules={{ required: "Username is required" }}
-            defaultValue=""
-          />
-          <ErrorText conditionalMessage={errors?.username?.message} />
-          <Controller
-            control={control}
-            render={({ onChange, onBlur, value }) => (
-              <View style={styles.inputContainer}>
-                <MaterialIcons name="lock" size={24} style={styles.icon} />
-                <TextInput
-                  placeholder="password"
-                  secureTextEntry={true}
-                  placeholderTextColor="#888888"
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                  error={errors.password}
-                />
-              </View>
-            )}
-            name="password"
-            rules={{ required: "Password is required" }}
-            defaultValue=""
-          />
-          <ErrorText conditionalMessage={errors?.password?.message} />
-          <Controller
-            control={control}
-            render={({ onChange, onBlur, value }) => (
-              <View style={styles.inputContainer}>
-                <MaterialIcons name="lock" size={24} style={styles.icon} />
-                <TextInput
-                  placeholder="confirm password"
-                  placeholderTextColor="#888888"
-                  secureTextEntry={true}
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                  error={errors.password}
-                />
-              </View>
-            )}
-            name="confirmPassword"
-            rules={{
-              required: "Password confirmation is required",
-              validate: (value) =>
-                value === passwordRef.current || "The passwords do not match",
-            }}
-            defaultValue=""
-          />
-          <ErrorText conditionalMessage={errors?.confirmPassword?.message} />
-          <TouchableOpacity
-            style={styles.signupButtonContainer}
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text style={styles.signupButtonText}>Rekisteröidy</Text>
-          </TouchableOpacity>
+    <KeyboardAwareScrollView>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Celebrate style={styles.logo} />
+          <Text style={styles.name}>{`Let's start!`}</Text>
         </View>
-        <View style={styles.signInTextContainer}>
-          <Text style={styles.userText}>On jo käyttäjä?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate(LOGIN_ROUTE)}>
-            <Text style={styles.signInText}>Kirjaudu sisään</Text>
-          </TouchableOpacity>
+        <View style={styles.wrapper}>
+          <Text style={styles.title}>Rekisteröidy</Text>
+          <View style={styles.form}>
+            <Controller
+              control={control}
+              render={({ onChange, onBlur, value }) => (
+                <View style={styles.inputContainer}>
+                  <MaterialIcons
+                    name="alternate-email"
+                    size={24}
+                    style={styles.icon}
+                  />
+                  <TextInput
+                    placeholder="your@email.com"
+                    style={styles.input}
+                    placeholderTextColor="#888888"
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    error={errors.username}
+                  />
+                </View>
+              )}
+              name="username"
+              rules={{ required: "Username is required" }}
+              defaultValue=""
+            />
+            <ErrorText conditionalMessage={errors?.username?.message} />
+            <Controller
+              control={control}
+              render={({ onChange, onBlur, value }) => (
+                <View style={styles.inputContainer}>
+                  <MaterialIcons name="lock" size={24} style={styles.icon} />
+                  <TextInput
+                    placeholder="password"
+                    secureTextEntry={true}
+                    placeholderTextColor="#888888"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    error={errors.password}
+                  />
+                </View>
+              )}
+              name="password"
+              rules={{ required: "Password is required" }}
+              defaultValue=""
+            />
+            <ErrorText conditionalMessage={errors?.password?.message} />
+            <Controller
+              control={control}
+              render={({ onChange, onBlur, value }) => (
+                <View style={styles.inputContainer}>
+                  <MaterialIcons name="lock" size={24} style={styles.icon} />
+                  <TextInput
+                    placeholder="confirm password"
+                    placeholderTextColor="#888888"
+                    secureTextEntry={true}
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    error={errors.password}
+                  />
+                </View>
+              )}
+              name="confirmPassword"
+              rules={{
+                required: "Password confirmation is required",
+                validate: (value) =>
+                  value === passwordRef.current || "The passwords do not match",
+              }}
+              defaultValue=""
+            />
+            <ErrorText conditionalMessage={errors?.confirmPassword?.message} />
+            <TouchableOpacity
+              style={styles.signupButtonContainer}
+              onPress={handleSubmit(onSubmit)}
+            >
+              <Text style={styles.signupButtonText}>Rekisteröidy</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.signInTextContainer}>
+            <Text style={styles.userText}>On jo käyttäjä?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate(LOGIN_ROUTE)}>
+              <Text style={styles.signInText}>Kirjaudu sisään</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
