@@ -12,32 +12,19 @@ import { useLogin } from "../hooks";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FF7E15",
-    alignSelf: "center",
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-    width: "100%",
+  outerScrollViewContainer: {
+    backgroundColor: theme.colors.white, // Fills up the bottom that doesn't get filled otherwise
+  },
+  innerViewContainer: {
+    backgroundColor: theme.colors.primary, // Necessary fill for the svg and the rest of the upper design of the screen
   },
   wrapper: {
-    backgroundColor: "#fff",
-    flex: 1,
-    borderTopRightRadius: 20,
+    backgroundColor: theme.colors.white,
     borderTopLeftRadius: 20,
-    marginTop: 15,
-  },
-  logo: {
-    width: 50,
-    height: 50
-  },
-  imageContainer: {
-    borderWidth: 2,
-    width: 200,
-    height: 200
+    borderTopColor: theme.colors.white,
+    borderTopRightRadius: 20,
   },
   input: {
-    flex: 1,
     borderLeftWidth: 1,
     borderLeftColor: theme.colors.primary,
     paddingLeft: 15,
@@ -54,13 +41,11 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   loginButtonContainer: {
-    color: "#FF7E15",
     backgroundColor: theme.colors.primary,
     borderRadius: 50,
-    padding: 22,
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowOpacity: 0.8,
+    color: theme.colors.primary,
     marginTop: 30,
+    padding: 22,
   },
   loginButtonText: {
     color: theme.colors.textSecondary,
@@ -76,29 +61,22 @@ const styles = StyleSheet.create({
   },
   form: {
     marginTop: 20,
-    paddingHorizontal: 30,
+    marginHorizontal: 30,
   },
   signUpTextContainer: {
     display: "flex",
-    justifyContent: "center",
     flexDirection: "row",
+    justifyContent: "center",
     marginTop: 15,
   },
   signUpText: {
     fontSize: theme.fontSizes.subheading,
     textDecorationLine: "underline",
     color: theme.colors.primary,
-    //color: "#FF7E15",
   },
   noUserText: {
     fontSize: theme.fontSizes.subheading,
     marginRight: 5,
-  },
-  bigTitle: {
-    color: theme.colors.white,
-    fontSize: theme.fontSizes.heading,
-    textAlign: "center",
-    marginTop: 5,
   },
   icon: {
     right: 10,
@@ -126,11 +104,10 @@ export const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <View style={styles.container}>
+    <KeyboardAwareScrollView style={styles.outerScrollViewContainer}>
+      <View style={styles.innerViewContainer}>
         <View style={styles.imageContainer}>
-          <Trophy style={styles.logo}/>
-          <Text style={styles.bigTitle}>{`Let's start!`}</Text>
+          <Trophy />
         </View>
         <View style={styles.wrapper}>
           <Text style={styles.title}>Kirjaudu sisään</Text>

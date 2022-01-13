@@ -1,13 +1,28 @@
 import * as React from "react";
+import {View, Dimensions, StyleSheet} from "react-native";
 import Svg, { Path, G, Rect, Defs, ClipPath } from "react-native-svg";
 
-export const Trophy = (props) => (
+const originalWidth = 530;
+const originalHeight = 530;
+const aspectRatio = originalWidth / originalHeight;
+const windowWidth = Dimensions.get("window").width;
+
+const styles = StyleSheet.create({
+  container: {
+    alignSelf: 'center',
+    aspectRatio,
+    marginTop: 40,
+    width: windowWidth * 0.66
+  }
+});
+
+export const Trophy = () => (
+  <View style={styles.container}>
   <Svg
-    width={530}
-    height={468}
-    fill="none"
+    width="100%"
+    height="100%"
+    viewBox={`0 0 ${originalWidth} ${originalHeight}`}
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
   >
     <Path
       d="M313.817 424.426c-72.175 0-130.664-60.354-130.664-134.831 0-74.478 58.489-134.832 130.664-134.832 72.176 0 130.665 60.354 130.665 134.832-.085 74.477-58.574 134.831-130.665 134.831Z"
@@ -318,4 +333,5 @@ export const Trophy = (props) => (
       </ClipPath>
     </Defs>
   </Svg>
+  </View>
 );

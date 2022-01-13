@@ -38,6 +38,11 @@ On Linux, replace the localhost with value `hostname -I`. It might return multip
 docker-compose -f docker-compose.android-yml up
 ```
 
+## Wireless debugging on an Android device
+
+- [Android developer docs](https://developer.android.com/studio/command-line/adb).
+- If unable to make it work, try [this stackoverflow alternative](https://stackoverflow.com/a/68891919) when you navigate in the `platform-tools` directory.
+
 ## Emulator troubleshooting
 
 <b>Unable to locate ADB</b>
