@@ -16,4 +16,4 @@
 
 ### Figma prototypes
 
-[Link](https://www.figma.com/file/bIPGT3TAwMkM6eEMnK3dXA/Untitled?node-id=0%3A1)
+[Link - Design by Susanna Ritala](https://www.figma.com/file/bIPGT3TAwMkM6eEMnK3dXA/Untitled?node-id=0%3A1)
