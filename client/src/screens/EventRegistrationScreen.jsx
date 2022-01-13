@@ -29,7 +29,7 @@ export const EventRegistrationScreen = () => {
 
   useEffect(() => {
     const requestPermission = async () => {
-      const { status } = await Camera.requestPermissionsAsync();
+      const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     };
 
@@ -65,6 +65,7 @@ export const EventRegistrationScreen = () => {
 
   return (isFocused &&
     <Camera
+      type={Camera.Constants.Type.back}
       onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
       ratio="16:9"
       style={StyleSheet.absoluteFill}

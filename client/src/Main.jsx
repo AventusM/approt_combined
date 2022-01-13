@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import { useBackHandler } from "@react-native-community/hooks";
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from "@react-navigation/stack"
+import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from '@expo/vector-icons';
 
 import { GlobalMessage } from "./components/Generic";

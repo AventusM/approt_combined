@@ -13,6 +13,6 @@ EXPOSE 5034
 EXPOSE 5555
 
 COPY package.json package-lock.json /usr/src/app/
-RUN npm config set unsafe-perm true
-RUN npm install --force
+#RUN npm config set unsafe-perm true
+RUN npm install
 COPY . /usr/src/app
