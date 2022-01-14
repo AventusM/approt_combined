@@ -1,3 +1,4 @@
 import { MainScreenPlaceholder } from './MainScreenPlaceholder';
+import { EventInfoScreenPlaceholder } from './EventInfoScreenPlaceholder';
 
-export { MainScreenPlaceholder };
+export { MainScreenPlaceholder, EventInfoScreenPlaceholder };

@@ -5,6 +5,7 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 import QRCode from "react-native-qrcode-svg";
 
 import { Text } from '../components/Generic';
+import { EventInfoScreenPlaceholder } from '../components/Placeholders';
 import { SINGLE_EVENT_GROUP_ROUTE_MAP } from '../constants';
 import { useSingleAppro } from '../hooks';
 import theme from '../theme';
@@ -109,12 +110,8 @@ export const EventInfoScreen = () => {
     );
   };
 
-  /* TODO --> Try react native skeleton */
-  /* TODO --> Try react native skeleton */
-  /* TODO --> Try react native skeleton */
-  /* TODO --> Try react native skeleton */
   if(status === "loading"){
-    return <Text>Loading...</Text>;
+    return <EventInfoScreenPlaceholder />;
   }
 
   return (

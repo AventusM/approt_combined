@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { useBackHandler } from "@react-native-community/hooks";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from '@expo/vector-icons';
+import * as NavigationBarActions from "expo-navigation-bar";
 
 import { GlobalMessage } from "./components/Generic";
 import securestorage from "./securestorage";
@@ -62,7 +63,20 @@ const HomeStackScreen = () => {
 const Main = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.authData);
+  const navigationState = useNavigationState(state => state);
   const navigation = useNavigation();
+
+  // Probably not the most optimal as it resets the color on every check
+  // TODO: Change only if necessary
+  useEffect(() => {
+    const setNavBarColor = async (color) => NavigationBarActions.setBackgroundColorAsync(color);
+    const routeName = (navigationState.routeNames[navigationState.index]);
+    if(routeName === WELCOME_ROUTE){
+      setNavBarColor(theme.colors.primary);
+    } else {
+      setNavBarColor(theme.colors.white);
+    }
+  }, [navigationState]);
 
   useEffect(() => {
     const checkToken = async () => {

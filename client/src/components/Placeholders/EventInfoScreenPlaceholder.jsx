@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export const MainScreenPlaceholder = () => {
+export const EventInfoScreenPlaceholder = () => {
   return (
     <View style={styles.container}>
       <ContentLoader 
@@ -27,10 +27,10 @@ export const MainScreenPlaceholder = () => {
         backgroundColor="#d3d7cf"
         foregroundColor="#eeeeec"
       >
-        <Circle cx="31" cy="31" r="15" /> 
-        <Rect x="58" y="18" rx="2" ry="2" width="140" height="10" /> 
-        <Rect x="58" y="34" rx="2" ry="2" width="140" height="10" /> 
-        <Rect x="0" y="60" rx="2" ry="2" width="400" height="400" />
+      <Rect x="16" y="17" rx="0" ry="0" width="360" height="200" />
+      <Circle cx="35" cy="248" r="20" />
+      <Rect x="69" y="229" rx="2" ry="2" width="275" height="15" />
+      <Rect x="69" y="253" rx="2" ry="2" width="140" height="15" />
       </ContentLoader>
   </View>
   );

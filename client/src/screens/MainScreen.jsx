@@ -97,7 +97,7 @@ export const MainScreen = () => {
   const { currentUser } = useSelector((state) => state.authData);
   const { data, status } = useAppros();
 
-  if(status === "loading"){
+  if(status === 'loading'){
     return <MainScreenPlaceholder />;
   }
 

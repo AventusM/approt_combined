@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation, useIsFocused } from '@react-navigation/native';
-import * as NavigationBarActions from "expo-navigation-bar";
+import { useNavigation } from '@react-navigation/native';
 
 import {LOGIN_ROUTE, SIGN_UP_ROUTE} from '../constants';
 import {ApprotLogo} from '../customizedAssets';
@@ -79,17 +78,6 @@ const styles = StyleSheet.create({
 
 export const WelcomeScreen = () => {
   const navigation = useNavigation();
-  const isFocused = useIsFocused();
-
-  // This is purely experimental
-  useEffect(() => {
-    const setNavBarColor = async (color) => NavigationBarActions.setBackgroundColorAsync(color);
-    if(isFocused){
-      setNavBarColor(theme.colors.primary);
-    } else {
-      setNavBarColor(theme.colors.white);
-    }
-  }, [isFocused]);
 
     return (
       <View style={styles.welcomeDataContainer}>
