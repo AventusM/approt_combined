@@ -12,7 +12,8 @@ import { useLogin } from "../hooks";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-  scrollViewContentContainerStyle: {display: 'flex', flexDirection: 'column', flex: 1},
+  // flexGrow specifically --> https://github.com/APSL/react-native-keyboard-aware-scroll-view/issues/99#issuecomment-360939114
+  scrollViewContentContainerStyle: { flexGrow: 1},
   scrollViewStyle: {backgroundColor: theme.colors.primary},
   wrapper: {
     backgroundColor: theme.colors.white,

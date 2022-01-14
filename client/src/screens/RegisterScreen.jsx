@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
@@ -12,8 +12,9 @@ import { Text, TextInput } from "../components/Generic";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-  scrollViewContentContainerStyle: {display: 'flex', flexDirection: 'column', flex: 1},
-  scrollViewStyle: {backgroundColor: theme.colors.primary},
+  // flexGrow specifically --> https://github.com/APSL/react-native-keyboard-aware-scroll-view/issues/99#issuecomment-360939114
+  scrollViewContentContainerStyle: { flexGrow: 1},
+  scrollViewStyle: { backgroundColor: theme.colors.primary },
   wrapper: {
     backgroundColor: theme.colors.white,
     borderTopRightRadius: 20,
@@ -107,7 +108,10 @@ export const RegisterScreen = () => {
   };
 
   return (
-    <KeyboardAwareScrollView style={styles.scrollViewStyle} contentContainerStyle={styles.scrollViewContentContainerStyle}>
+    <KeyboardAwareScrollView 
+      style={styles.scrollViewStyle} 
+      contentContainerStyle={styles.scrollViewContentContainerStyle}
+      >
         <Celebrate />
         <View style={styles.wrapper}>
           <Text style={styles.title}>Rekisteröidy</Text>

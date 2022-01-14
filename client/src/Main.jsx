@@ -72,7 +72,11 @@ const Main = () => {
     const setNavBarColor = async (color) => NavigationBarActions.setBackgroundColorAsync(color);
     const routeName = navigationState && navigationState.routeNames[navigationState.index];
     // Either just opened the app or got there through a back button / logout
-    if(!routeName || routeName === WELCOME_ROUTE){
+    const justLaunched = !routeName;
+    const onWelcomeScreen = routeName === WELCOME_ROUTE;
+    const loggedOut = !currentUser && routeName === WELCOME_ROUTE; // Might not be necessary
+    //console.log(`justLaunched:${justLaunched} -- onWelcomeScreen:${onWelcomeScreen} -- loggedOut:${loggedOut}`);
+    if(justLaunched || onWelcomeScreen || loggedOut){
       setNavBarColor(theme.colors.primary);
     } else {
       setNavBarColor(theme.colors.white);
