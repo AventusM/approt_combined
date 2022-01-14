@@ -70,8 +70,9 @@ const Main = () => {
   // TODO: Change only if necessary
   useEffect(() => {
     const setNavBarColor = async (color) => NavigationBarActions.setBackgroundColorAsync(color);
-    const routeName = (navigationState.routeNames[navigationState.index]);
-    if(routeName === WELCOME_ROUTE){
+    const routeName = navigationState && navigationState.routeNames[navigationState.index];
+    // Either just opened the app or got there through a back button / logout
+    if(!routeName || routeName === WELCOME_ROUTE){
       setNavBarColor(theme.colors.primary);
     } else {
       setNavBarColor(theme.colors.white);
