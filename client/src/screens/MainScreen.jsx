@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
+import { useSelector } from "react-redux";
+
 import { ApproList, ApproListHeader } from "../components/ApproPreview";
 import { MainScreenPlaceholder } from '../components/Placeholders';
 import { useAppros } from "../hooks";
-import { useSelector } from "react-redux";
-
 import { Text } from "../components/Generic";
 import theme from "../theme";
 

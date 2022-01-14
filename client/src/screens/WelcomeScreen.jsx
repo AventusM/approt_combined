@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import * as NavigationBarActions from "expo-navigation-bar";
 
 import {LOGIN_ROUTE, SIGN_UP_ROUTE} from '../constants';
 import {ApprotLogo} from '../customizedAssets';
@@ -13,11 +14,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     display: "flex",
     flex: 1,
-    height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
   },
   box: {
-    backgroundColor: "#FF7E15",
+    backgroundColor: theme.colors.primary,
     width: "100%",
     height: "70%",
     display: "flex",
@@ -28,23 +28,23 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 20,
   },
   loginScreenButton: {
-    color: "#FF7E15",
+    color: theme.colors.primary,
     width: 230,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     borderRadius: 50,
     padding: 22,
     shadowColor: "rgba(0, 0, 0, 0.1)",
     shadowOpacity: 0.8,
   },
   signupScreenButton: {
-    color: "#fff",
+    color: theme.colors.white,
     width: 230,
     borderRadius: 50,
     padding: 22,
     shadowColor: "rgba(0, 0, 0, 0.1)",
     shadowOpacity: 0.8,
     borderWidth: 1,
-    borderColor: "#fff",
+    borderColor: theme.colors.white,
     marginTop: 20,
   },
   loginText: {
@@ -79,6 +79,18 @@ const styles = StyleSheet.create({
 
 export const WelcomeScreen = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  // This is purely experimental
+  useEffect(() => {
+    const setNavBarColor = async (color) => NavigationBarActions.setBackgroundColorAsync(color);
+    if(isFocused){
+      setNavBarColor(theme.colors.primary);
+    } else {
+      setNavBarColor(theme.colors.white);
+    }
+  }, [isFocused]);
+
     return (
       <View style={styles.welcomeDataContainer}>
       <ApprotLogo style={styles.logo} />
@@ -87,7 +99,7 @@ export const WelcomeScreen = () => {
         <TouchableOpacity
           style={styles.loginScreenButton}
           onPress={() => navigation.navigate(LOGIN_ROUTE)}
-          underlayColor="#fff"
+          underlayColor={theme.colors.white}
         >
           <Text style={styles.loginText}>Kirjaudu sisään</Text>
         </TouchableOpacity>
