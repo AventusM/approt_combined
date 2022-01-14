@@ -12,21 +12,19 @@ import { useLogin } from "../hooks";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-  outerScrollViewContainer: {
-    backgroundColor: theme.colors.white, // Fills up the bottom that doesn't get filled otherwise
-  },
-  innerViewContainer: {
-    backgroundColor: theme.colors.primary, // Necessary fill for the svg and the rest of the upper design of the screen
-  },
+  scrollViewContentContainerStyle: {display: 'flex', flexDirection: 'column', flex: 1},
+  scrollViewStyle: {backgroundColor: theme.colors.primary},
   wrapper: {
     backgroundColor: theme.colors.white,
     borderTopLeftRadius: 20,
     borderTopColor: theme.colors.white,
     borderTopRightRadius: 20,
+    flex: 1, // Fill the bottom space
   },
   input: {
-    borderLeftWidth: 1,
     borderLeftColor: theme.colors.primary,
+    borderLeftWidth: 1,
+    flex: 1, // Fill the width for triggering onpress
     paddingLeft: 15,
   },
   inputContainer: {
@@ -104,76 +102,72 @@ export const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAwareScrollView style={styles.outerScrollViewContainer}>
-      <View style={styles.innerViewContainer}>
-        <View style={styles.imageContainer}>
-          <Trophy />
-        </View>
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Kirjaudu sisään</Text>
-            <View style={styles.form}>
-              <Controller
-                control={control}
-                render={({ onChange, onBlur, value }) => (
-                  <View style={styles.inputContainer}>
-                    <MaterialIcons
-                      name="alternate-email"
-                      size={24}
-                      style={styles.icon}
-                    />
-                    <TextInput
-                      placeholder="your@email.com"
-                      style={styles.input}
-                      placeholderTextColor="#888888"
-                      onBlur={onBlur}
-                      onChangeText={(value) => onChange(value)}
-                      value={value}
-                      error={errors.username}
-                    />
-                  </View>
-                )}
-                name="username"
-                rules={{ required: "Username is required" }}
-                defaultValue=""
-              />
-              <Text style={styles.errorText}>{errors?.username?.message}</Text>
-              <Controller
-                control={control}
-                render={({ onChange, onBlur, value }) => (
-                  <View style={styles.inputContainer}>
-                    <MaterialIcons name="lock" size={24} style={styles.icon} />
-                    <TextInput
-                      placeholder="password"
-                      secureTextEntry={true}
-                      style={styles.input}
-                      placeholderTextColor="#888888"
-                      onBlur={onBlur}
-                      onChangeText={(value) => onChange(value)}
-                      value={value}
-                      error={errors.password}
-                    />
-                  </View>
-                )}
-                name="password"
-                rules={{ required: "Password is required" }}
-                defaultValue=""
-              />
-              <Text style={styles.errorText}>{errors?.password?.message}</Text>
-              <Text style={styles.forgot}>Unohtuiko salasana?</Text>
-              <TouchableOpacity
-                style={styles.loginButtonContainer}
-                onPress={handleSubmit(onSubmit)}
-              >
-                <Text style={styles.loginButtonText}>Kirjaudu</Text>
+    <KeyboardAwareScrollView style={styles.scrollViewStyle} contentContainerStyle={styles.scrollViewContentContainerStyle}>
+      <Trophy />
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>Kirjaudu sisään</Text>
+          <View style={styles.form}>
+            <Controller
+              control={control}
+              render={({ onChange, onBlur, value }) => (
+                <View style={styles.inputContainer}>
+                  <MaterialIcons
+                    name="alternate-email"
+                    size={24}
+                    style={styles.icon}
+                  />
+                  <TextInput
+                    placeholder="your@email.com"
+                    style={styles.input}
+                    placeholderTextColor="#888888"
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    error={errors.username}
+                  />
+                </View>
+              )}
+              name="username"
+              rules={{ required: "Username is required" }}
+              defaultValue=""
+            />
+            <Text style={styles.errorText}>{errors?.username?.message}</Text>
+            <Controller
+              control={control}
+              render={({ onChange, onBlur, value }) => (
+                <View style={styles.inputContainer}>
+                  <MaterialIcons name="lock" size={24} style={styles.icon} />
+                  <TextInput
+                    placeholder="password"
+                    secureTextEntry={true}
+                    style={styles.input}
+                    placeholderTextColor="#888888"
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    error={errors.password}
+                  />
+                </View>
+              )}
+              name="password"
+              rules={{ required: "Password is required" }}
+              defaultValue=""
+            />
+            <Text style={styles.errorText}>{errors?.password?.message}</Text>
+            <Text style={styles.forgot}>Unohtuiko salasana?</Text>
+            <TouchableOpacity
+              style={styles.loginButtonContainer}
+              onPress={handleSubmit(onSubmit)}
+            >
+              <Text style={styles.loginButtonText}>Kirjaudu</Text>
+            </TouchableOpacity>
+            <View style={styles.signUpTextContainer}>
+              <Text style={styles.noUserText}>Ei käyttäjää?</Text>
+              <TouchableOpacity onPress={() => navigation.navigate(SIGN_UP_ROUTE)}>
+                <Text style={styles.signUpText}>Luo käyttäjä</Text>
               </TouchableOpacity>
-              <View style={styles.signUpTextContainer}>
-                <Text style={styles.noUserText}>Ei käyttäjää?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate(SIGN_UP_ROUTE)}>
-                  <Text style={styles.signUpText}>Luo käyttäjä</Text>
-                </TouchableOpacity>
-              </View>
             </View>
-        </View>
+          </View>
       </View>
     </KeyboardAwareScrollView>
   );

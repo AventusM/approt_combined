@@ -12,25 +12,19 @@ import { Text, TextInput } from "../components/Generic";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-  container: {
-    alignSelf: "center",
-    backgroundColor: "#FF7E15",
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-    width: "100%",
-  },
+  scrollViewContentContainerStyle: {display: 'flex', flexDirection: 'column', flex: 1},
+  scrollViewStyle: {backgroundColor: theme.colors.primary},
   wrapper: {
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.white,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     marginTop: 15,
-    flex: 1,
+    flex: 1, // Fill the bottom space
   },
   input: {
-    flex: 1,
-    borderLeftWidth: 1,
     borderLeftColor: theme.colors.primary,
+    borderLeftWidth: 1,
+    flex: 1, // Fill the width for triggering onpress
     paddingLeft: 15,
   },
   inputContainer: {
@@ -49,13 +43,10 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   signupButtonContainer: {
-    color: "#FF7E15",
-    width: "100%",
     backgroundColor: theme.colors.primary,
     borderRadius: 50,
     padding: 22,
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowOpacity: 0.8,
+    width: "100%",
   },
   signupButtonText: {
     color: theme.colors.textSecondary,
@@ -71,7 +62,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   form: {
-    paddingHorizontal: 30,
+    marginHorizontal: 30,
   },
   signInTextContainer: {
     display: "flex",
@@ -94,7 +85,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 5,
   },
-  imageContainer: {},
 });
 
 export const RegisterScreen = () => {
@@ -117,12 +107,8 @@ export const RegisterScreen = () => {
   };
 
   return (
-    <KeyboardAwareScrollView>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Celebrate style={styles.logo} />
-          <Text style={styles.name}>{`Let's start!`}</Text>
-        </View>
+    <KeyboardAwareScrollView style={styles.scrollViewStyle} contentContainerStyle={styles.scrollViewContentContainerStyle}>
+        <Celebrate />
         <View style={styles.wrapper}>
           <Text style={styles.title}>Rekisteröidy</Text>
           <View style={styles.form}>
@@ -213,7 +199,6 @@ export const RegisterScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
     </KeyboardAwareScrollView>
   );
 };

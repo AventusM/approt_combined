@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   }
 });
 
+// https://stackoverflow.com/questions/61657859/how-to-find-correct-values-for-width-height-and-viewbox-with-react-native-svg
 export const Trophy = () => (
   <View style={styles.container}>
   <Svg

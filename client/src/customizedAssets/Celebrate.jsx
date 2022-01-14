@@ -1,14 +1,29 @@
 import * as React from "react";
+import {View, Dimensions, StyleSheet} from "react-native";
 import Svg, { Circle, Path, G } from "react-native-svg";
 
-export function Celebrate(props) {
+
+const originalWidth = 900;
+const originalHeight = 800;
+const aspectRatio = originalWidth / originalHeight;
+const windowWidth = Dimensions.get("window").width;
+
+const styles = StyleSheet.create({
+  container: {
+    alignSelf: 'center',
+    aspectRatio,
+    marginTop: 40,
+    width: windowWidth * 0.66
+  }
+});
+
+export function Celebrate() {
   return (
+    <View style={styles.container}>
     <Svg
-      data-name="Layer 1"
-      width={420}
-      height={139}
-      viewBox="0 0 841.54746 739"
-      {...props}
+      width="100%"
+      height="100%"
+      viewBox={`0 0 ${originalWidth} ${originalHeight}`}
     >
       <Circle
         cx={413.35274}
@@ -177,6 +192,7 @@ export function Celebrate(props) {
         fill="#fafafa"
       />
     </Svg>
+    </View>
   );
 }
 
