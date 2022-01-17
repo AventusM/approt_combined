@@ -24,9 +24,13 @@ First, start the backend with the following command.
 npm run dev
 ```
 
-## Heroku
+## Production environment
 
-[This application is hosted on heroku](https://secure-escarpment-94792.herokuapp.com/)
+[The production environment is hosted on google cloud (run)](https://approt-combined-server-service-eve36qzyjq-lz.a.run.app)
+
+## Testing environment
+
+[The test environment is hosted on heroku](https://secure-escarpment-94792.herokuapp.com/)
 
 ### Manual deployment
 

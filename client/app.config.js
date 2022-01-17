@@ -2,6 +2,7 @@
 import 'dotenv/config';
 
 export default {
+  owner: 's_a_a_s',
   name: 'approt',
   slug: 'approt',
   version: '1.0.0',
