@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { RefreshControl, View, StyleSheet, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 
 import { ApproList, ApproListHeader } from "../components/ApproPreview";
@@ -95,9 +95,10 @@ const styles = StyleSheet.create({
 
 export const MainScreen = () => {
   const { currentUser } = useSelector((state) => state.authData);
-  const { data, status } = useAppros();
+  const { data, isFetching, refetch } = useAppros();
 
-  if(status === 'loading'){
+  // Replaces loading status (use it elsewhere here with error etc.)
+  if(isFetching){
     return <MainScreenPlaceholder />;
   }
 
@@ -120,7 +121,14 @@ export const MainScreen = () => {
   const { availableEvents, joinedEvents } = shownApproData();
 
   return (
-    <ScrollView style={styles.scrollViewContainer}>
+    <ScrollView style={styles.scrollViewContainer}
+    refreshControl={
+      <RefreshControl
+        tintColor={theme.colors.primary}
+        refreshing={isFetching}
+        onRefresh={refetch}
+      />
+    }>
       <View style={styles.dataContainer}>
         <View style={styles.introContainer}>
           <Text style={styles.userIntro}>Hello {currentUser.username}!</Text>
