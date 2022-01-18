@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { RefreshControl, ScrollView, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { useSelector } from "react-redux";
 import { useRoute, useNavigation } from '@react-navigation/native';
 import QRCode from "react-native-qrcode-svg";
@@ -12,7 +12,10 @@ import theme from '../theme';
 
 
 const styles = StyleSheet.create({
-  outerContainer: {
+  scrollViewContainer: {
+    flexGrow: 1,
+  },
+  viewContainer: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
 export const EventInfoScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { data, status } = useSingleAppro(route.params.approData.id);
+  const { data, isFetching, refetch } = useSingleAppro(route.params.approData.id);
   const { currentUser } = useSelector((state) => state.authData);
   
   const doOpenMap = () => {
@@ -110,35 +113,43 @@ export const EventInfoScreen = () => {
     );
   };
 
-  if(status === "loading"){
+  if(isFetching){
     return <EventInfoScreenPlaceholder />;
   }
 
   return (
-    <View style={styles.outerContainer}>
-      {/* Non-list container into own component perhaps? */}
-      <View style={styles.nonListContainer}>
-        <Text style={styles.title}>{data.name}</Text>
-        <View style={styles.levelTrackerCardContainer}>
-          <Text>Vielä 5 jäljellä olevaa rastia ensimmäiseen tasoon</Text>
+    <ScrollView style={styles.scrollViewContainer}
+    refreshControl={
+      <RefreshControl
+        tintColor={theme.colors.primary}
+        refreshing={isFetching}
+        onRefresh={refetch}
+      />}>
+      <View style={styles.viewContainer}>
+        {/* Non-list container into own component perhaps? */}
+        <View style={styles.nonListContainer}>
+          <Text style={styles.title}>{data.name}</Text>
+          <View style={styles.levelTrackerCardContainer}>
+            <Text>Vielä 5 jäljellä olevaa rastia ensimmäiseen tasoon</Text>
+          </View>
+          <View style={styles.filterRowContainer}>
+            <Text style={[styles.activeFilterRowItem, styles.filterRowItemBase]}>Kaikki</Text>
+            <Text style={[styles.filterRowItemBase]}>Järjestys</Text>
+            <Text style={[styles.filterRowItemBase]}>Baarit</Text>
+            <Text style={[styles.filterRowItemBase]}>Ravintolat</Text>
+          </View>
         </View>
-        <View style={styles.filterRowContainer}>
-          <Text style={[styles.activeFilterRowItem, styles.filterRowItemBase]}>Kaikki</Text>
-          <Text style={[styles.filterRowItemBase]}>Järjestys</Text>
-          <Text style={[styles.filterRowItemBase]}>Baarit</Text>
-          <Text style={[styles.filterRowItemBase]}>Ravintolat</Text>
-        </View>
+        <FlatList
+          contentContainerStyle={{justifyContent: 'center'}}
+          style={styles.cardListContainer}
+          ItemSeparatorComponent={() => <View style={styles.divider}/>}
+          data={data.events}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          extraData={data.events}
+      />
       </View>
-      <FlatList
-        contentContainerStyle={{justifyContent: 'center'}}
-        style={styles.cardListContainer}
-        ItemSeparatorComponent={() => <View style={styles.divider}/>}
-        data={data.events}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        extraData={data.events}
-    />
-    </View>
+    </ScrollView>
   );
 };
 
