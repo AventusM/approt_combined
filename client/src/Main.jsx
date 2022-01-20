@@ -47,6 +47,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     position: 'relative',
   },
+  tabBarIconLabel: {
+    marginTop: -5
+  },
+  activeLabel: {
+    color: theme.colors.primary
+  },
+  inactiveLabel: {
+    color: 'rgba(0,0,0,0.4)'
+  }
 });
 
 const Tab = createBottomTabNavigator();
@@ -145,7 +154,15 @@ const Main = () => {
       <GlobalMessage />
       <Tab.Navigator initialRouteName={MAIN_ROUTE}
               screenOptions={({ route }) => ({
-                tabBarLabel: () => <Text><Translate term={route.name}/></Text>,
+                // Connect the label and icon slightly closer to one another
+                tabBarLabel: ({ focused }) => {
+                  return (
+                    <Text style={[styles.tabBarIconLabel, focused ? styles.activeLabel : styles.inactiveLabel]}>
+                      <Translate term={route.name}/>
+                    </Text>
+                  );
+                },
+
                 tabBarIcon: ({ focused, color, size }) => {
                   let iconName;
       
