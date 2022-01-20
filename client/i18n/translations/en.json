@@ -1,0 +1,19 @@
+{
+  "appName": "Appro app",
+  "welcome": "Hi there!",
+  "login": "Login",
+  "register": "Registration",
+  "registerCallToAction": "Register",
+  "forgotPasswordQuestion": "Forgot password?",
+  "username": "Username",
+  "password": "Password",
+  "emailPlaceholder": "Email placeholder",
+  "usernameFieldRequired": "Username is required",
+  "passwordFieldRequired": "Password is required",
+  "confirmPassword": "Confirm password",
+  "passwordConfirmationFieldRequired": "Password confirmation is required",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "noUserQuestion": "No user?",
+  "createUser": "Create a new account",
+  "alreadyHaveUserQuestion": "Already registered?"
+}

@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import {LOGIN_ROUTE, SIGN_UP_ROUTE} from '../constants';
 import {ApprotLogo} from '../customizedAssets';
-import {Text} from '../components/Generic';
+import {Text, Translate} from '../components/Generic';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
@@ -83,19 +83,25 @@ export const WelcomeScreen = () => {
       <View style={styles.welcomeDataContainer}>
       <ApprotLogo style={styles.logo} />
       <View style={styles.box}>
-        <Text style={styles.title}>Approt</Text>
+        <Text style={styles.title}>
+          <Translate term="appName"/>
+        </Text>
         <TouchableOpacity
           style={styles.loginScreenButton}
           onPress={() => navigation.navigate(LOGIN_ROUTE)}
           underlayColor={theme.colors.white}
         >
-          <Text style={styles.loginText}>Kirjaudu sisään</Text>
+          <Text style={styles.loginText}>
+            <Translate term="login"/>
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signupScreenButton}
           onPress={() => navigation.navigate(SIGN_UP_ROUTE)}
         >
-          <Text style={styles.signupText}>Rekisteröidy</Text>
+          <Text style={styles.signupText}>
+            <Translate term="registerCallToAction"/>
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

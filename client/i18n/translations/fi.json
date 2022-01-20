@@ -1,0 +1,19 @@
+{
+  "appName": "Approt",
+  "welcome": "Hei!",
+  "login": "Kirjaudu",
+  "register": "Rekisteröinti",
+  "registerCallToAction": "Rekisteröidy",
+  "forgotPasswordQuestion": "Unohditko salasanasi?",
+  "username": "Käyttäjätunnus",
+  "password": "Salasana",
+  "emailPlaceholder": "Sähköposti",
+  "usernameFieldRequired": "Käyttäjätunnus vaaditaan",
+  "passwordFieldRequired": "Salasana vaaditaan",
+  "confirmPassword": "Salasana uusiksi",
+  "passwordConfirmationFieldRequired": "Salasanan varmistus vaaditaan",
+  "passwordsDoNotMatch": "Salasanat eivät täsmää",
+  "noUserQuestion": "Ei käyttäjää?",
+  "createUser": "Luo uusi käyttäjätunnus",
+  "alreadyHaveUserQuestion": "On jo tunnus?"
+}

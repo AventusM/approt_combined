@@ -4,11 +4,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import i18n from 'i18n-js'; // Usage outside typical jsx, within props etc.
 
 import { useSignup } from "../hooks";
 import { LOGIN_ROUTE } from "../constants";
 import { Celebrate } from "../customizedAssets/Celebrate";
-import { Text, TextInput } from "../components/Generic";
+import { Text, TextInput, Translate } from "../components/Generic";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
@@ -114,7 +115,9 @@ export const RegisterScreen = () => {
       >
         <Celebrate />
         <View style={styles.wrapper}>
-          <Text style={styles.title}>Rekisteröidy</Text>
+          <Text style={styles.title}>
+            <Translate term="register"/>
+          </Text>
           <View style={styles.form}>
             <Controller
               control={control}
@@ -126,7 +129,7 @@ export const RegisterScreen = () => {
                     style={styles.icon}
                   />
                   <TextInput
-                    placeholder="your@email.com"
+                    placeholder={i18n.t("emailPlaceholder")}
                     style={styles.input}
                     placeholderTextColor="#888888"
                     onBlur={onBlur}
@@ -137,7 +140,7 @@ export const RegisterScreen = () => {
                 </View>
               )}
               name="username"
-              rules={{ required: "Username is required" }}
+              rules={{ required: i18n.t("usernameFieldRequired") }}
               defaultValue=""
             />
             <ErrorText conditionalMessage={errors?.username?.message} />
@@ -147,7 +150,7 @@ export const RegisterScreen = () => {
                 <View style={styles.inputContainer}>
                   <MaterialIcons name="lock" size={24} style={styles.icon} />
                   <TextInput
-                    placeholder="password"
+                    placeholder={i18n.t("password")}
                     secureTextEntry={true}
                     placeholderTextColor="#888888"
                     style={styles.input}
@@ -159,7 +162,7 @@ export const RegisterScreen = () => {
                 </View>
               )}
               name="password"
-              rules={{ required: "Password is required" }}
+              rules={{ required: i18n.t("passwordFieldRequired") }}
               defaultValue=""
             />
             <ErrorText conditionalMessage={errors?.password?.message} />
@@ -169,7 +172,7 @@ export const RegisterScreen = () => {
                 <View style={styles.inputContainer}>
                   <MaterialIcons name="lock" size={24} style={styles.icon} />
                   <TextInput
-                    placeholder="confirm password"
+                    placeholder={i18n.t("confirmPassword")}
                     placeholderTextColor="#888888"
                     secureTextEntry={true}
                     style={styles.input}
@@ -182,9 +185,9 @@ export const RegisterScreen = () => {
               )}
               name="confirmPassword"
               rules={{
-                required: "Password confirmation is required",
+                required: i18n.t("passwordConfirmationFieldRequired"),
                 validate: (value) =>
-                  value === passwordRef.current || "The passwords do not match",
+                  value === passwordRef.current || i18n.t("passwordsDoNotMatch"),
               }}
               defaultValue=""
             />
@@ -193,13 +196,19 @@ export const RegisterScreen = () => {
               style={styles.signupButtonContainer}
               onPress={handleSubmit(onSubmit)}
             >
-              <Text style={styles.signupButtonText}>Rekisteröidy</Text>
+              <Text style={styles.signupButtonText}>
+                <Translate term="registerCallToAction" />
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.signInTextContainer}>
-            <Text style={styles.userText}>On jo käyttäjä?</Text>
+            <Text style={styles.userText}>
+              <Translate term="alreadyHaveUserQuestion" />
+            </Text>
             <TouchableOpacity onPress={() => navigation.navigate(LOGIN_ROUTE)}>
-              <Text style={styles.signInText}>Kirjaudu sisään</Text>
+              <Text style={styles.signInText}>
+                <Translate term="login" />
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
