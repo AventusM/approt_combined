@@ -6,7 +6,8 @@ import * as fiTranslation from './translations/fi.json';
 // TODO: Swedish translations
 
 i18n.translations = {
-  en: enTranslation,
+  ['en-US']: enTranslation,
+  ['en-GB']: enTranslation,
   fi: fiTranslation,
 };
 
