@@ -6,12 +6,11 @@ import * as fiTranslation from './translations/fi.json';
 // TODO: Swedish translations
 
 i18n.translations = {
-  ['en-US']: enTranslation,
-  ['en-GB']: enTranslation,
+  en: enTranslation,
   fi: fiTranslation,
 };
 
-//i18n.locale = 'fi'; --> Quick testing purposes
+//i18n.locale = 'fi'; // --> Quick testing purposes
 i18n.locale = Localization.locale;
 i18n.fallbacks = true;
 

@@ -5,6 +5,7 @@ import {
   EVENT_GROUPS_API_PATH,
   PARTICIPATION_REQUEST_TYPE_ADD,
   PARTICIPATION_REQUEST_TYPE_REMOVE,
+  AUTH_KEY,
 } from '../constants';
 import securestorage from '../securestorage';
 
@@ -23,7 +24,7 @@ const fetchSingleEventGroup = async (eventGroupId) => {
 
 const createEventGroup = async (eventGroupInputData) => {
   try {
-    const authData = await securestorage.authStorage.getData();
+    const authData = await securestorage.getData(AUTH_KEY);
     const sentOptions = {
       ...eventGroupInputData,
       ...authData,
@@ -42,7 +43,7 @@ const createEventGroup = async (eventGroupInputData) => {
 
 const doEventGroupAction = async ({ approId, requestType }) => {
   try {
-    const authData = await securestorage.authStorage.getData();
+    const authData = await securestorage.getData(AUTH_KEY);
     const sentOptions = {
       requestType: requestType,
       ...authData,

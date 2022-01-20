@@ -4,13 +4,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import i18n from 'i18n-js'; // Usage outside typical jsx, within props etc.
 
 import { useSignup } from "../hooks";
 import { LOGIN_ROUTE } from "../constants";
 import { Celebrate } from "../customizedAssets/Celebrate";
 import { Text, TextInput, Translate } from "../components/Generic";
 import theme from "../theme";
+import { translate } from "../utils";
 
 const styles = StyleSheet.create({
   // flexGrow specifically --> https://github.com/APSL/react-native-keyboard-aware-scroll-view/issues/99#issuecomment-360939114
@@ -129,7 +129,7 @@ export const RegisterScreen = () => {
                     style={styles.icon}
                   />
                   <TextInput
-                    placeholder={i18n.t("emailPlaceholder")}
+                    placeholder={translate("emailPlaceholder")}
                     style={styles.input}
                     placeholderTextColor="#888888"
                     onBlur={onBlur}
@@ -140,7 +140,7 @@ export const RegisterScreen = () => {
                 </View>
               )}
               name="username"
-              rules={{ required: i18n.t("usernameFieldRequired") }}
+              rules={{ required: translate("usernameFieldRequired") }}
               defaultValue=""
             />
             <ErrorText conditionalMessage={errors?.username?.message} />
@@ -150,7 +150,7 @@ export const RegisterScreen = () => {
                 <View style={styles.inputContainer}>
                   <MaterialIcons name="lock" size={24} style={styles.icon} />
                   <TextInput
-                    placeholder={i18n.t("password")}
+                    placeholder={translate("password")}
                     secureTextEntry={true}
                     placeholderTextColor="#888888"
                     style={styles.input}
@@ -162,7 +162,7 @@ export const RegisterScreen = () => {
                 </View>
               )}
               name="password"
-              rules={{ required: i18n.t("passwordFieldRequired") }}
+              rules={{ required: translate("passwordFieldRequired") }}
               defaultValue=""
             />
             <ErrorText conditionalMessage={errors?.password?.message} />
@@ -172,7 +172,7 @@ export const RegisterScreen = () => {
                 <View style={styles.inputContainer}>
                   <MaterialIcons name="lock" size={24} style={styles.icon} />
                   <TextInput
-                    placeholder={i18n.t("confirmPassword")}
+                    placeholder={translate("confirmPassword")}
                     placeholderTextColor="#888888"
                     secureTextEntry={true}
                     style={styles.input}
@@ -185,9 +185,9 @@ export const RegisterScreen = () => {
               )}
               name="confirmPassword"
               rules={{
-                required: i18n.t("passwordConfirmationFieldRequired"),
+                required: translate("passwordConfirmationFieldRequired"),
                 validate: (value) =>
-                  value === passwordRef.current || i18n.t("passwordsDoNotMatch"),
+                  value === passwordRef.current || translate("passwordsDoNotMatch"),
               }}
               defaultValue=""
             />

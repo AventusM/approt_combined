@@ -1,12 +1,13 @@
-import axios from "axios";
-import securestorage from "../securestorage";
+import axios from 'axios';
+import securestorage from '../securestorage';
 import {
   BASEURL,
   EVENTS_API_PATH,
   PARTICIPATION_REQUEST_TYPE_ADD,
   PARTICIPATION_REQUEST_TYPE_COMPLETE,
   PARTICIPATION_REQUEST_TYPE_REMOVE,
-} from "../constants";
+  AUTH_KEY,
+} from '../constants';
 
 const fetchEvents = async () => {
   const response = await axios.get(`${BASEURL}/${EVENTS_API_PATH}`);
@@ -15,7 +16,7 @@ const fetchEvents = async () => {
 
 const doEventAction = async ({ eventId, requestType }) => {
   try {
-    const authData = await securestorage.authStorage.getData();
+    const authData = await securestorage.getData(AUTH_KEY);
     const sentOptions = {
       requestType,
       ...authData,
@@ -27,7 +28,7 @@ const doEventAction = async ({ eventId, requestType }) => {
     });
     return response.data;
   } catch (error) {
-    console.log("doEventAction error", error);
+    console.log('doEventAction error', error);
   }
 };
 

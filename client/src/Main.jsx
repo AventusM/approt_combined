@@ -5,10 +5,12 @@ import { useBackHandler } from "@react-native-community/hooks";
 import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
+import i18n from 'i18n-js';
+
 import { Ionicons } from '@expo/vector-icons';
 import * as NavigationBarActions from "expo-navigation-bar";
 
-import { GlobalMessage } from "./components/Generic";
+import { GlobalMessage, Text, Translate } from "./components/Generic";
 import securestorage from "./securestorage";
 import actions from "./store/actions";
 import theme from './theme';
@@ -36,6 +38,8 @@ import {
   EVENT_GROUP_CREATION_ROUTE,
   SETTINGS_SCREEN_ROUTE,
   WELCOME_ROUTE,
+  AUTH_KEY,
+  LANG_KEY
 } from "./constants";
 
 const styles = StyleSheet.create({
@@ -85,7 +89,7 @@ const Main = () => {
 
   useEffect(() => {
     const checkToken = async () => {
-      const foundCurrentUserData = await securestorage.authStorage.getData();
+      const foundCurrentUserData = await securestorage.getData(AUTH_KEY);
       if (foundCurrentUserData) {
         dispatch(
           actions.authActions.setCurrentUser({
@@ -96,7 +100,25 @@ const Main = () => {
       }
     };
 
+    const checkLanguage = async () => {
+      const foundLangData = await securestorage.getData(LANG_KEY);
+      if(foundLangData){
+        dispatch(actions.langActions.setLanguage(foundLangData));
+      } else {
+        // Check that locale is supported
+        // If not, default to english
+        const userLanguage = i18n.currentLocale().split("-")[0];
+        const supportedLanguages = ['en', 'fi', 'sv']; // TODO: Check swedish (se or sv?)
+        if(supportedLanguages.includes(userLanguage)){
+          dispatch(actions.langActions.setLanguage(userLanguage));
+        } else {
+          dispatch(actions.langActions.setLanguage('en')); // Set english by default
+        }
+      }
+    };
+
     checkToken();
+    checkLanguage();
   }, []);
 
   useBackHandler(() => {
@@ -123,7 +145,7 @@ const Main = () => {
       <GlobalMessage />
       <Tab.Navigator initialRouteName={MAIN_ROUTE}
               screenOptions={({ route }) => ({
-
+                tabBarLabel: () => <Text><Translate term={route.name}/></Text>,
                 tabBarIcon: ({ focused, color, size }) => {
                   let iconName;
       

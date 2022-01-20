@@ -1,13 +1,14 @@
-import axios from "axios";
-import storage from "../../securestorage/";
+import axios from 'axios';
+import securestorage from '../../securestorage/';
 import {
   BASEURL,
   LOGIN_API_PATH,
   SET_CURRENT_USER,
   REMOVE_CURRENT_USER,
-} from "../../constants";
+  AUTH_KEY,
+} from '../../constants';
 
-import actions from "../actions";
+import actions from '../actions';
 
 const setCurrentUser = (data) => {
   return {
@@ -27,14 +28,14 @@ const login = (credentials) => {
     try {
       const { data } = await axios.post(
         `${BASEURL}/${LOGIN_API_PATH}`,
-        credentials
+        credentials,
       );
 
-      await storage.authStorage.setData(data);
+      await securestorage.setData(data, AUTH_KEY);
       const { username, userId } = data;
       dispatch(setCurrentUser({ username, userId }));
     } catch (error) {
-      console.log("login error", error);
+      console.log('login error', error);
     }
   };
 };
@@ -42,10 +43,10 @@ const login = (credentials) => {
 const logout = () => {
   return async (dispatch) => {
     try {
-      await storage.authStorage.removeData();
+      await securestorage.removeData(AUTH_KEY);
       dispatch(removeCurrentUser());
     } catch (error) {
-      console.log("logout error", error);
+      console.log('logout error', error);
     }
   };
 };
@@ -58,7 +59,7 @@ const register = (inputData) => {
       const { username, password } = inputData;
       dispatch(login({ username, password }));
     } catch (error) {
-      console.log("register error", error);
+      console.log('register error', error);
     }
   };
 };

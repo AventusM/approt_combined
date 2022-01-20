@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { VarelaRound_400Regular } from '@expo-google-fonts/varela-round';
 import AppLoading from 'expo-app-loading';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 import Main from './src/Main';
 import store from './src/store';
@@ -28,7 +29,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <NavigationContainer>
-          <Main />
+          <ActionSheetProvider>
+            <Main />
+          </ActionSheetProvider>
         </NavigationContainer>
       </Provider>
     </QueryClientProvider>

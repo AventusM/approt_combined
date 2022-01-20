@@ -15,5 +15,12 @@
   "passwordsDoNotMatch": "Passwords do not match",
   "noUserQuestion": "No user?",
   "createUser": "Create a new account",
-  "alreadyHaveUserQuestion": "Already registered?"
+  "alreadyHaveUserQuestion": "Already registered?",
+  "home": "Home",
+  "create": "Create",
+  "scan": "Scan",
+  "settings": "Settings",
+  "usernameInformation": "User {{username}} information",
+  "signOut": "Sign out",
+  "setLanguage": "Set language"
 }

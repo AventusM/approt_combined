@@ -4,12 +4,12 @@ import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import i18n from 'i18n-js'; // Usage outside typical jsx, within props etc.
 
 import { SIGN_UP_ROUTE } from "../constants";
 import { Text, TextInput, Translate } from "../components/Generic";
 import { Trophy } from "../customizedAssets";
 import { useLogin } from "../hooks";
+import { translate } from '../utils';
 import theme from "../theme";
 
 const styles = StyleSheet.create({
@@ -121,7 +121,7 @@ export const LoginScreen = () => {
                     style={styles.icon}
                   />
                   <TextInput
-                    placeholder={i18n.t("emailPlaceholder")}
+                    placeholder={translate('emailPlaceholder')}
                     style={styles.input}
                     placeholderTextColor="#888888"
                     onBlur={onBlur}
@@ -132,7 +132,7 @@ export const LoginScreen = () => {
                 </View>
               )}
               name="username"
-              rules={{ required: i18n.t("usernameFieldRequired") }}
+              rules={{ required: translate('usernameFieldRequired') }}
               defaultValue=""
             />
             <Text style={styles.errorText}>{errors?.username?.message}</Text>
@@ -142,7 +142,7 @@ export const LoginScreen = () => {
                 <View style={styles.inputContainer}>
                   <MaterialIcons name="lock" size={24} style={styles.icon} />
                   <TextInput
-                    placeholder={i18n.t("password")}
+                    placeholder={translate('password')}
                     secureTextEntry={true}
                     style={styles.input}
                     placeholderTextColor="#888888"
@@ -154,7 +154,7 @@ export const LoginScreen = () => {
                 </View>
               )}
               name="password"
-              rules={{ required: i18n.t("passwordFieldRequired") }}
+              rules={{ required: translate('passwordFieldRequired') }}
               defaultValue=""
             />
             <Text style={styles.errorText}>{errors?.password?.message}</Text>

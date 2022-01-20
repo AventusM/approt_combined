@@ -1,3 +1,2 @@
-import authStorage from "./auth";
-
-export default { authStorage };
+import storage from './storage';
+export default storage;

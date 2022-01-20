@@ -15,5 +15,12 @@
   "passwordsDoNotMatch": "Salasanat eivät täsmää",
   "noUserQuestion": "Ei käyttäjää?",
   "createUser": "Luo uusi käyttäjätunnus",
-  "alreadyHaveUserQuestion": "On jo tunnus?"
+  "alreadyHaveUserQuestion": "On jo tunnus?",
+  "home": "Koti",
+  "create": "Luo",
+  "scan": "Skannaa",
+  "settings": "Asetukset",
+  "usernameInformation": "Käyttäjän {{username}} tiedot",
+  "signOut": "Kirjaudu ulos",
+  "setLanguage": "Aseta kieli"
 }

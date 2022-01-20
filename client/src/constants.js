@@ -2,17 +2,17 @@
 import Constants from 'expo-constants';
 
 // Scene routes. URL style remnants of react-router-native
-export const MAIN_ROUTE = 'Home';
-export const USERS_ROUTE = 'Users';
-export const EVENTS_REGISTER_ROUTE = 'Scan';
-export const LOGIN_ROUTE = 'Login';
-export const SIGN_UP_ROUTE = 'Signup';
+export const MAIN_ROUTE = 'home';
+export const USERS_ROUTE = 'users';
+export const EVENTS_REGISTER_ROUTE = 'scan';
+export const LOGIN_ROUTE = 'login';
+export const SIGN_UP_ROUTE = 'signup';
 export const SINGLE_EVENT_GROUP_ROUTE_BASE = 'eventgroups';
-export const SINGLE_EVENT_GROUP_ROUTE = 'Appro view';
-export const SINGLE_EVENT_GROUP_ROUTE_MAP = 'Appro map';
-export const EVENT_GROUP_CREATION_ROUTE = 'Create';
-export const SETTINGS_SCREEN_ROUTE = 'Settings';
-export const WELCOME_ROUTE = 'Welcome';
+export const SINGLE_EVENT_GROUP_ROUTE = 'appro view';
+export const SINGLE_EVENT_GROUP_ROUTE_MAP = 'appro map';
+export const EVENT_GROUP_CREATION_ROUTE = 'create';
+export const SETTINGS_SCREEN_ROUTE = 'settings';
+export const WELCOME_ROUTE = 'welcome';
 
 // Redux actions / reducers
 export const SET_MESSAGE = 'SET_MESSAGE';
@@ -22,6 +22,7 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 export const SHOW_NAVBAR = 'SHOW_NAVBAR';
 export const HIDE_NAVBAR = 'HIDE_NAVBAR';
+export const SET_CURRENT_LANGUAGE = 'SET_CURRENT_LANGUAGE';
 
 // React query keys
 // ALL
@@ -33,6 +34,7 @@ export const GET_ONE_EVENT_GROUP_QUERY_KEY = 'GET_ONE_EVENT_GROUP_QUERY_KEY';
 
 // Phone storage
 export const AUTH_KEY = 'AUTH';
+export const LANG_KEY = 'LANG';
 
 // Development, subject to change
 export const EVENTS_API_PATH = 'api/events';
