@@ -1,12 +1,12 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { SIGN_UP_ROUTE } from "../constants";
-import { Text, TextInput, Translate } from "../components/Generic";
+import { Text, TextInput, Translate, TouchableOpacity } from "../components/Generic";
 import { Trophy } from "../customizedAssets";
 import { useLogin } from "../hooks";
 import { translate } from '../utils';

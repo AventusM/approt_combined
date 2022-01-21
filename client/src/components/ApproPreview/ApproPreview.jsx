@@ -1,10 +1,10 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { SINGLE_EVENT_GROUP_ROUTE } from "../../constants";
-import { Text } from "../Generic";
+import { Text, TouchableOpacity } from "../Generic";
 import theme from "../../theme";
 import { useJoinAppro, useLeaveAppro } from "../../hooks";
 

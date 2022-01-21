@@ -1,9 +1,9 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Text, Translate } from "../components/Generic";
-import {SettingsList} from '../components/Settings';
+import { Text, Translate, TouchableOpacity } from "../components/Generic";
+import { SettingsList } from '../components/Settings';
 import actions from "../store/actions";
 import theme from "../theme";
 

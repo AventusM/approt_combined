@@ -1,10 +1,10 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 
-import {LOGIN_ROUTE, SIGN_UP_ROUTE} from '../constants';
-import {ApprotLogo} from '../customizedAssets';
-import {Text, Translate} from '../components/Generic';
+import { LOGIN_ROUTE, SIGN_UP_ROUTE } from '../constants';
+import { ApprotLogo } from '../customizedAssets';
+import { Text, Translate, TouchableOpacity } from '../components/Generic';
 import theme from '../theme';
 
 const styles = StyleSheet.create({

@@ -1,10 +1,10 @@
 import React from 'react';
-import { RefreshControl, ScrollView, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { RefreshControl, ScrollView, View, StyleSheet, FlatList } from 'react-native';
 import { useSelector } from "react-redux";
 import { useRoute, useNavigation } from '@react-navigation/native';
 import QRCode from "react-native-qrcode-svg";
 
-import { Text } from '../components/Generic';
+import { Text, TouchableOpacity } from '../components/Generic';
 import { EventInfoScreenPlaceholder } from '../components/Placeholders';
 import { SINGLE_EVENT_GROUP_ROUTE_MAP } from '../constants';
 import { useSingleAppro } from '../hooks';

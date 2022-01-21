@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
@@ -8,7 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useSignup } from "../hooks";
 import { LOGIN_ROUTE } from "../constants";
 import { Celebrate } from "../customizedAssets/Celebrate";
-import { Text, TextInput, Translate } from "../components/Generic";
+import { Text, TextInput, Translate, TouchableOpacity } from "../components/Generic";
 import theme from "../theme";
 import { translate } from "../utils";
 

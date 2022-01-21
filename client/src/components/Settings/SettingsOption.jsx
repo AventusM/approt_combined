@@ -1,7 +1,7 @@
 import React from "react";
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import theme from "../../theme";
-import {Text, Translate} from '../Generic';
+import { Text, Translate, TouchableOpacity } from '../Generic';
 
 const styles = StyleSheet.create({
   itemContainer: {

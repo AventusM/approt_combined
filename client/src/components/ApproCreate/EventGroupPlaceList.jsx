@@ -1,8 +1,8 @@
 import React from "react";
-import { View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { Text } from "../Generic";
+import { Text, TouchableOpacity } from "../Generic";
 import theme from "../../theme";
 
 const styles = StyleSheet.create({

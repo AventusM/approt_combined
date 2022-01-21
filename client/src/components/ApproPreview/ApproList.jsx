@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { FULL_OPACITY } from "../../constants";
 
 import { ApproPreview } from "./ApproPreview";
+import { TouchableOpacity } from '../Generic';
 
 const styles = StyleSheet.create({
   approListContainer: {

@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { Text } from "../Generic";
+import { Text, TouchableOpacity } from "../Generic";
 import theme from "../../theme";
 import { useCreateAppro } from "../../hooks";
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import theme from "../../theme";
 
 import { DayMonthYearData, TimeData } from "./";
-import { Text } from "../Generic";
+import { Text, TouchableOpacity } from "../Generic";
 
 const styles = StyleSheet.create({
   dateTimeRowContainer: {
